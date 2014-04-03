@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="PositionKeeperDataWarehouse.Dao.IDataLoadLogDao">
+    <insert id="createDataLoadLog" parameterType="PositionKeeperDataWarehouse.Entity.DataLoadLog">
+        INSERT INTO DataLoadLog
+        VALUES (#{gameKey},#{snapshotDate})
+    </insert>   
+    <insert id="deleteDataLoadLog">
+    	DELETE FROM DataLoadLog
+    </insert>
+    <select id="getLastestDataLoadLogByGameKey" resultType="PositionKeeperDataWarehouse.Entity.DataLoadLog" parameterType="int">
+        SELECT * FROM DataLoadLog
+  		WHERE GameKey = #{GameKey} and DataLoadLogKey = (Select max(DataLoadLogKey) from DataLoadLog where GameKey = #{GameKey})
+    </select> 
+</mapper>

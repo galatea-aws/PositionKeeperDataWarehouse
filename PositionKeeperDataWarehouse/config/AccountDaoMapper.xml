@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="PositionKeeperDataWarehouse.Dao.IAccountDao">
+
+    <insert id="createAccount" parameterType="PositionKeeperDataWarehouse.Entity.Account">
+        INSERT INTO Account
+        VALUES (#{accountName},#{memberSince},#{experience},#{primaryInvestingStyle},#{timeHorizon}, #{userId})
+    </insert>  
+    
+    <insert id="createAccounts" parameterType="PositionKeeperDataWarehouse.Entity.Account">
+        INSERT INTO Account
+        VALUES
+        <foreach collection="list" item="account" index="index" separator="," >   
+        (#{account.accountName},#{account.memberSince},#{account.experience},#{account.primaryInvestingStyle},#{account.timeHorizon}, #{account.userId})
+        </foreach>
+    </insert>  
+    
+    <update id="updateAccount" parameterType="PositionKeeperDataWarehouse.Entity.Account">
+    	UPDATE Account 
+    	SET AccountName = #{accountName},
+    		MemberSince = #{memberSince},
+    		Experience = #{experience},
+    		PrimaryInvestingStyle = #{primaryInvestingStyle},
+    		TimeHorizon = #{timeHorizon} 
+    	WHERE UserId = #{userId}
+    </update>    
+    
+    <select id="getAllAccounts" resultMap="account">
+    	SELECT * FROM Account
+    </select>  
+     
+    <select id="getAccountByUserId" resultType="PositionKeeperDataWarehouse.Entity.Account">
+    	SELECT * FROM Account where UserId = #{userId}
+    </select> 
+    
+    <select id="countAccountByUserId" resultType="int">
+    	SELECT count(*) FROM Account where AccountName = #{userId}
+    </select> 
+    
+    <resultMap id="account" type="PositionKeeperDataWarehouse.Entity.Account">
+	    <id column="AccountKey" property="accountKey" />
+	    <result column="AccountName" property="accountName" />
+	    <result column="MemberSince" property="memberSince" />
+	    <result column="Experience" property="experience" />
+	    <result column="PrimaryInvestingStyle" property="primaryInvestingStyle" />
+	    <result column="TimeHorizon" property="timeHorizon" />
+   	    <result column="UserId" property="userId" />
+    </resultMap>
+</mapper>

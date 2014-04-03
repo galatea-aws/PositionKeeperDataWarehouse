@@ -1,0 +1,27 @@
+Data Warehouse:
+DimDate
+DimAccount
+DimGame
+DimStock
+DimOption
+FactGameStatusWeeklySnapshot
+FactPositionWeeklySnapshot
+FactTradeHistory
+ETLLog
+
+
+
+Source Database:
+Account
+Game
+Stock
+Option
+TradeHistory
+PositionWeeklySnapshot
+GameStatusWeeklySnapshot
+TradeHistory
+TradeHistoryIncreasement
+WebCrawlerLog
+
+
+CNDKX-9979D-VMMXD-RKJMR-WFD8C
