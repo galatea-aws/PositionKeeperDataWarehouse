@@ -9,9 +9,10 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import PositionKeeperDataWarehouse.Entity.DataLoadLog;
 import PositionKeeperDataWarehouse.Entity.Game;
-import PositionKeeperDataWarehouse.Service.IAccountService;
-import PositionKeeperDataWarehouse.Service.IDataLoadLogService;
-import PositionKeeperDataWarehouse.Service.IGameService;
+import PositionKeeperDataWarehouse.Service.Interface.IAccountService;
+import PositionKeeperDataWarehouse.Service.Interface.IDataLoadLogService;
+import PositionKeeperDataWarehouse.Service.Interface.IGameService;
+import PositionKeeperDataWarehouse.Service.Interface.ITradeHistoryService;
 
 /**
  * Hello world!
@@ -23,6 +24,7 @@ public class App
 	private IDataLoadLogService dataLoadLogService;
 	private IAccountService accountService;
 	private IGameService gameService;
+	private ITradeHistoryService tradeHistoryService;
 	
     public static void main( String[] args )
     {
@@ -77,5 +79,13 @@ public class App
 
 	public void setAccountService(IAccountService accountService) {
 		this.accountService = accountService;
+	}
+
+	public ITradeHistoryService getTradeHistoryService() {
+		return tradeHistoryService;
+	}
+
+	public void setTradeHistoryService(ITradeHistoryService tradeHistoryService) {
+		this.tradeHistoryService = tradeHistoryService;
 	}
 }

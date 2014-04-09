@@ -1,0 +1,36 @@
+TradeType
+--------------------------------------------------
+Cover Stock: Cover at Limit
+Cover Stock: Cover at Market
+Cover Stock: Cover at Market Open
+Cover Stock: Cover at Stop
+Stock: Cover at Trailing Stop
+Short Stock: Short at Limit
+Short Stock: Short at Market
+Short Stock: Short at Market Open
+Short Stock: Short at Stop
+
+Stock: Buy at Limit
+Stock: Buy at Market
+Stock: Buy at Market Open
+Stock: Buy at Stop
+Stock: Sell at Limit
+Stock: Sell at Market
+Stock: Sell at Market Open
+Stock: Sell at Stop
+Stock: Sell at Trailing Stop
+
+Option: Buy to Open at Limit
+Option: Buy to Open at Market
+Option: Buy to Open at Market Open
+Option: Buy to Open at Stop
+Option: Sell to Close at Limit
+Option: Sell to Close at Market
+Option: Sell to Close at Market Open
+Option: Sell to Close at Stop
+
+Stock: Split Adjustment Buy
+Stock: Split Adjustment Cover
+Stock: Split Adjustment Sell
+Stock: Split Adjustment Short
+Portfolio Reset

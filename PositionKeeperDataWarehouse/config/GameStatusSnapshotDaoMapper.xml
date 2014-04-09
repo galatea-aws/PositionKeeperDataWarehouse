@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="PositionKeeperDataWarehouse.Dao.IGameStatusSnapshotDao">
+    <insert id="createTempGameStatusSnapshots" parameterType="PositionKeeperDataWarehouse.Entity.TempGameStatusSnapshot">
+        INSERT INTO TempGameStatusSnapshot
+        VALUES 
+        <foreach collection="list" item="tempGameStatusSnapshot" index="index" separator="," >   
+        (#{tempGameStatusSnapshot.accountKey},#{tempGameStatusSnapshot.gameKey},#{tempGameStatusSnapshot.profit})
+        </foreach>
+    </insert> 
+    <insert id="createGameStatusSnapshots" parameterType="PositionKeeperDataWarehouse.Entity.TempGameStatusSnapshot">
+        INSERT INTO GameStatusSnapshot
+        VALUES 
+        <foreach collection="list" item="gameStatusSnapshot" index="index" separator="," >   
+        (#{gameStatusSnapshot.accountKey},#{gameStatusSnapshot.dataLoadLogKey},#{gameStatusSnapshot.rank},#{gameStatusSnapshot.accountValue},#{gameStatusSnapshot.buyingPower}
+        ,#{gameStatusSnapshot.cash},#{gameStatusSnapshot.profit})
+        </foreach>
+    </insert> 
+    
+    <delete id="deleteAllTempGameStatusSnapshot">
+    	DELETE FROM TempGameStatusSnapshot
+    </delete>
+    
+    <select id="getTempGameStatusSnapshotByGameKey" resultMap="tempGameStatusSnapshot">
+    	SELECT * FROM TempGameStatusSnapshot WHERE GameKey = #{gameKey}
+    </select>
+    
+    <resultMap id="tempGameStatusSnapshot" type="PositionKeeperDataWarehouse.Entity.TempGameStatusSnapshot">
+	    <id column="AccountKey" property="accountKey" />
+	    <id column="GameKey" property="gameKey" />
+	     <id column="Profit" property="profit" />
+    </resultMap>
+</mapper>

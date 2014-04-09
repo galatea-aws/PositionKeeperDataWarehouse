@@ -14,15 +14,20 @@ import org.jsoup.select.Elements;
 
 import PositionKeeperDataWarehouse.App;
 import PositionKeeperDataWarehouse.Dao.IAccountDao;
+import PositionKeeperDataWarehouse.Dao.IGameStatusSnapshotDao;
 import PositionKeeperDataWarehouse.Entity.Account;
 import PositionKeeperDataWarehouse.Entity.Game;
+import PositionKeeperDataWarehouse.Entity.TempGameStatusSnapshot;
+import PositionKeeperDataWarehouse.Helper.HtmlHelper;
 import PositionKeeperDataWarehouse.Helper.HttpHelper;
+import PositionKeeperDataWarehouse.Service.HttpThread.GameRankPageThread;
+import PositionKeeperDataWarehouse.Service.Interface.IAccountService;
 
 public class AccountServiceImpl implements IAccountService {
 
-	public static Logger logger = LogManager.getLogger(AccountServiceImpl.class
-			.getName());
+	public static Logger logger = LogManager.getLogger(AccountServiceImpl.class.getName());
 	private IAccountDao accountDao;
+	private IGameStatusSnapshotDao gameStatusSnapshotDao;
 	private HttpHelper httpHelper;
 
 	public void updateAccount(List<Game> gameList) throws Exception {
@@ -32,16 +37,28 @@ public class AccountServiceImpl implements IAccountService {
 	}
 
 	public void updateAccount(Game game) throws Exception {
+		
 		List<Account> accountList = new ArrayList<Account>();
-		int pageCount = getPageCount(game.getGameId());
-
-		GetGameRankPageThread[] threadList = new GetGameRankPageThread[10];
-		int pagePerThread = pageCount/10;
+		List<TempGameStatusSnapshot> tempGameStatusSnapshotList = new ArrayList<TempGameStatusSnapshot>();
+		//Get game rank page count
+		
+		String url = "http://www.investopedia.com/simulator/ranking/?RGID="
+				+ game.getGameKey();
+		String html = httpHelper.getHtml(url);
+		
+		int pageCount = HtmlHelper.getPageCount(html);
+		int threadCount = 10;
+		//Start 10 threads to get accounts info
+		GameRankPageThread[] threadList = new GameRankPageThread[threadCount+1];
+		int pagePerThread = pageCount/(threadCount);
 		for(int i=0;i<threadList.length;i++){
 			int startPage = 1 + pagePerThread *i;
 			int endPage = Math.min(startPage+pagePerThread-1,pageCount);
-			threadList[i] = new GetGameRankPageThread(httpHelper,game.getGameId(),startPage,endPage);
+			threadList[i] = new GameRankPageThread(httpHelper,game,startPage,endPage);
 		}
+		int modresult = pageCount%threadCount;
+		int startPage = pagePerThread*threadCount+1;
+		threadList[threadCount] = new GameRankPageThread(httpHelper,game,startPage,modresult+startPage);
 		
 		for(int i=0;i<threadList.length;i++){
 			threadList[i].start();
@@ -51,23 +68,24 @@ public class AccountServiceImpl implements IAccountService {
 			threadList[i].join();
 		}
 		
+		//Update accounts info
 		for(int i=0;i<threadList.length;i++){
-			accountList = new ArrayList<Account>();
-			
-			List<String> pageList = threadList[i].getPageList();
-			for (int j = 0; j < pagePerThread; j++) {
-				accountList.addAll(convertTableToAccounts(pageList.get(j)));
-			}
-			pageList.clear();
+			accountList = threadList[i].getAccountList();
 			createAccounts(accountList);
-			game.getAccountList().addAll(accountList);
+		}
+		
+		//Update 
+		for(int i=0;i<threadList.length;i++){
+			tempGameStatusSnapshotList = threadList[i].getTempGameStatusSnapshotList();
+			createTempGameStatusSnapshot(tempGameStatusSnapshotList);
 		}
 	}
 
 	public void createAccounts(List<Account> accountList) {
 		List<Account> newAccountList = new ArrayList<Account>();
+		List<TempGameStatusSnapshot> tempGameStatusSnapshotList = new ArrayList<TempGameStatusSnapshot>();
 		for (Account account : accountList) {
-			Account checkedAccount = accountDao.getAccountByUserId(account.getUserId());
+			Account checkedAccount = accountDao.getAccountByAccountKey(account.getAccountKey());
 			if (checkedAccount == null) {
 				newAccountList.add(account);
 				if (newAccountList.size() > 200) {
@@ -79,93 +97,29 @@ public class AccountServiceImpl implements IAccountService {
 		}
 		
 		if (newAccountList.size() > 0)
-			accountDao.createAccounts(newAccountList);
+			accountDao.createAccounts(newAccountList);		
 	}
-
-	public int getPageCount(String gameId) throws Exception {
-		String url = "http://www.investopedia.com/simulator/ranking/?RGID="
-				+ gameId;
-		String html = httpHelper.getHtml(url);
-		Document doc = Jsoup.parse(html);
-		Element pageCountNode = doc.select("td[class=PagerInfoCell]").first();
-		if (pageCountNode == null)
-			return 1;
-		String pageCountText = pageCountNode.text().trim();
-		String pattern = ".*of\\s(\\d+)";
-		Pattern r = Pattern.compile(pattern);
-		Matcher m = r.matcher(pageCountText);
-		if (m.find()) {
-			String pageCount = m.group(1).trim();
-			return Integer.valueOf(pageCount);
+	
+	public void createTempGameStatusSnapshot(List<TempGameStatusSnapshot> tempGameStatusSnapshotList){
+		List<TempGameStatusSnapshot> newTempGameStatusSnapshotList = new ArrayList<TempGameStatusSnapshot>();
+		for(TempGameStatusSnapshot tempGameStatusSnapshot : tempGameStatusSnapshotList){
+			newTempGameStatusSnapshotList.add(tempGameStatusSnapshot);
+			if(newTempGameStatusSnapshotList.size()>200){
+				gameStatusSnapshotDao.createTempGameStatusSnapshots(newTempGameStatusSnapshotList);
+				newTempGameStatusSnapshotList.clear();
+			}
 		}
-		return -1;
-	}
-
-	public List<Account> convertTableToAccounts(String html)
-			throws Exception {
-		List<Account> accountsOnPage = new ArrayList<Account>();
-		
-		Document doc = Jsoup.parse(html);
-		Elements rows = doc.select("tr[class=table_data]");
-		for (Element element : rows) {
-			Account account = new Account();
-
-			// Account Name
-			String accountName = element.select("a").first().text();
-			account.setAccountName(accountName);
-			if (accountName.equals("User not found"))
-				continue;
-			// User Id
-			String link = element.select("a[href]").first().attr("abs:href");
-			String pattern = ".*?UserID=(\\d+)";
-			Pattern r = Pattern.compile(pattern);
-			Matcher m = r.matcher(link);
-			if (m.find()) {
-				String userId = m.group(1);
-				account.setUserId(userId);
-			} else
-				continue;
-
-			// Overall%
-			String overall = element.select("span").get(4).text();
-			if (overall.equals("+0.00%"))
-				continue;
-			account.setMemberSince("");
-			account.setExperience("");
-			account.setPrimaryInvestingStyle("");
-			account.setTimeHorizon("");
-			/*
-			 * //Account Detail html = httpHelper.getHtml(link); doc =
-			 * Jsoup.parse(html);
-			 * 
-			 * //Member Since String memberSince =
-			 * doc.select("span[id=spSince]").first().ownText().trim();
-			 * account.setMemberSince(memberSince);
-			 * 
-			 * //Experience String experience =
-			 * doc.select("span[id=spExperience]").first().ownText().trim();
-			 * account.setExperience(experience);
-			 * 
-			 * //PrimaryInvestingStyle String primaryInvestingStyle =
-			 * doc.select("span[id=spInvStyle]").first().ownText().trim();
-			 * account.setPrimaryInvestingStyle(primaryInvestingStyle);
-			 * 
-			 * //TimeHorizon String timeHorizon =
-			 * doc.select("span[id=spTimeHorizon]").first().ownText().trim();
-			 * account.setTimeHorizon(timeHorizon);
-			 */
-
-			accountsOnPage.add(account);
+		if(newTempGameStatusSnapshotList.size()>0){
+			gameStatusSnapshotDao.createTempGameStatusSnapshots(newTempGameStatusSnapshotList);
 		}
-		return accountsOnPage;
 	}
 
 	public List<Account> getAllAccounts() {
 		return accountDao.getAllAccounts();
 	}
 
-	public Account getAccountByName(String userId) {
-		return accountDao.getAccountByUserId(userId);
+	public Account getAccountByAccountKey(int accountKey) {
+		return accountDao.getAccountByAccountKey(accountKey);
 	}
 
 	public IAccountDao getAccountDao() {
@@ -184,48 +138,12 @@ public class AccountServiceImpl implements IAccountService {
 		this.httpHelper = httpHelper;
 	}
 
-	public class GetGameRankPageThread extends Thread {
-		private HttpHelper httpHelper;
-		private List<String> pageList = new ArrayList<String>();
-		private String gameId;
-		private int startPage;
-		private int endPage;
-		public GetGameRankPageThread(HttpHelper httpHelper, String gameId, int startPage, int endPage) {
-			this.httpHelper = httpHelper;
-			this.gameId = gameId;
-			this.startPage = startPage;
-			this.endPage = endPage;
-		}
+	public IGameStatusSnapshotDao getGameStatusSnapshotDao() {
+		return gameStatusSnapshotDao;
+	}
 
-		/**
-		 * Executes the GetMethod and prints some status information.
-		 */
-		@Override
-		public void run() {
-			for(int i = startPage; i<=endPage; i++){
-				String url = "http://www.investopedia.com/simulator/ranking/?RGID="
-						+ gameId + "&page=" + String.valueOf(i);
-				String html;
-				logger.info("Processing Game: " + gameId + " Page: "
-						+ i);
-				try {
-					html = httpHelper.getHtml(url);
-					getPageList().add(html);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-
-		}
-
-		public List<String> getPageList() {
-			return pageList;
-		}
-
-		public void setPageList(List<String> pageList) {
-			this.pageList = pageList;
-		}
-
+	public void setGameStatusSnapshotDao(IGameStatusSnapshotDao gameStatusSnapshotDao) {
+		this.gameStatusSnapshotDao = gameStatusSnapshotDao;
 	}
 
 }

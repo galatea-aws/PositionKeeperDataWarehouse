@@ -15,16 +15,22 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import PositionKeeperDataWarehouse.Dao.IDataLoadLogDao;
 import PositionKeeperDataWarehouse.Dao.IGameDao;
+import PositionKeeperDataWarehouse.Dao.IGameStatusSnapshotDao;
 import PositionKeeperDataWarehouse.Entity.Game;
 import PositionKeeperDataWarehouse.Helper.HttpHelper;
+import PositionKeeperDataWarehouse.Service.Interface.IGameService;
 
 public class GameServiceImpl implements IGameService {
 	private IGameDao gameDao;
 	private HttpHelper httpHelper;
-
+	private IGameStatusSnapshotDao gameStatusSnapshotDao;
+	private IDataLoadLogDao dataLoadLogDao; 
+	
 	public void updateGameInfo() throws Exception{
 		List<Game> gameList = gameDao.getAllGames();
+		gameStatusSnapshotDao.deleteAllTempGameStatusSnapshot();
 		if(gameList.size()>0)
 			return;
 		else
@@ -33,8 +39,12 @@ public class GameServiceImpl implements IGameService {
 	
 	public void createGames() throws Exception {
 		ArrayList<Game> gameList = convertTableToGames();
+		int gameCount = 0;
 		for(Game game: gameList){
+			if(gameCount==5)
+				break;
 			gameDao.createGame(game);
+			gameCount++;
 		}
 	}
 
@@ -92,7 +102,7 @@ public class GameServiceImpl implements IGameService {
 			Pattern r = Pattern.compile(pattern);
 			Matcher m = r.matcher(link);
 			if (m.find()) {
-				game.setGameId(m.group(1));
+				game.setGameKey(Integer.parseInt(m.group(1)));
 				if(afterYear(game.getStartDate(),2009))
 					gameList.add(game);
 			}
@@ -107,7 +117,11 @@ public class GameServiceImpl implements IGameService {
 		return datetime.after(cal.getTime());
 	}
 	public List<Game> getAllGames() {
-		return gameDao.getAllGames();
+		List<Game> gameList = gameDao.getAllGames();
+		for(Game game : gameList){
+			game.setLatestDataLoadLog(dataLoadLogDao.getLastestDataLoadLogByGameKey(game.getGameKey()));
+		}
+		return gameList;
 	}
 
 	public IGameDao getGameDao() {
@@ -124,6 +138,22 @@ public class GameServiceImpl implements IGameService {
 
 	public void setHttpHelper(HttpHelper httpHelper) {
 		this.httpHelper = httpHelper;
+	}
+
+	public IGameStatusSnapshotDao getGameStatusSnapshotDao() {
+		return gameStatusSnapshotDao;
+	}
+
+	public void setGameStatusSnapshotDao(IGameStatusSnapshotDao gameStatusSnapshotDao) {
+		this.gameStatusSnapshotDao = gameStatusSnapshotDao;
+	}
+
+	public IDataLoadLogDao getDataLoadLogDao() {
+		return dataLoadLogDao;
+	}
+
+	public void setDataLoadLogDao(IDataLoadLogDao dataLoadLogDao) {
+		this.dataLoadLogDao = dataLoadLogDao;
 	}
 
 }

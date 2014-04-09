@@ -37,12 +37,6 @@ public class Game {
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
-	public String getGameId() {
-		return gameId;
-	}
-	public void setGameId(String gameId) {
-		this.gameId = gameId;
-	}
 	public String getGameName() {
 		return gameName;
 	}
@@ -53,7 +47,6 @@ public class Game {
 	public String toString(){
 		StringBuilder sb = new StringBuilder();
 		sb.append("Game Key: ").append(gameKey);
-		sb.append("Game Id: ").append(gameId);
 		sb.append("Game Name: ").append(gameName);
 		sb.append("Currency: ").append(currency);
 		sb.append("Start Date: ").append(startDate);

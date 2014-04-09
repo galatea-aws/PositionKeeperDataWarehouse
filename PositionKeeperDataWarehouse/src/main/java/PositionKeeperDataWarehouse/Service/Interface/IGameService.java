@@ -1,4 +1,4 @@
-package PositionKeeperDataWarehouse.Service;
+package PositionKeeperDataWarehouse.Service.Interface;
 
 import java.util.ArrayList;
 import java.util.List;

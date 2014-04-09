@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="PositionKeeperDataWarehouse.Dao.IProductDao">
+	<insert  id="createProduct" parameterType="PositionKeeperDataWarehouse.Entity.Product"  keyProperty="productKey" useGeneratedKeys="true">
+	        INSERT INTO Product
+	        VALUES
+	        (#{symbol},#{description},#{isOption})
+	</insert>
+	<select id="getProductBySymbol" resultType="PositionKeeperDataWarehouse.Entity.Product">
+		SELECT * FROM Product where Symbol = #{symbol}
+	</select>
+	
+	<select id ="getOptionBySymbol" resultType="PositionKeeperDataWarehouse.Entity.Option">
+		SELECT * FROM Product, Stockoption where Symbol = #{symbol} and Stockoption.OptionKey = Product.ProductKey
+	</select>
+	
+	<insert  id="createOption" parameterType="PositionKeeperDataWarehouse.Entity.Option">
+	        INSERT INTO Stockoption
+	        VALUES
+	        (#{optionKey},#{strikePrice},#{expirationDate},#{underlyingStockKey},#{optionType})
+	</insert>
+</mapper>

@@ -6,6 +6,7 @@ import java.util.List;
 import PositionKeeperDataWarehouse.Dao.IDataLoadLogDao;
 import PositionKeeperDataWarehouse.Entity.DataLoadLog;
 import PositionKeeperDataWarehouse.Entity.Game;
+import PositionKeeperDataWarehouse.Service.Interface.IDataLoadLogService;
 
 public class DataLoadLogServiceImpl implements IDataLoadLogService {
 
@@ -21,10 +22,6 @@ public class DataLoadLogServiceImpl implements IDataLoadLogService {
 			DataLoadLog latestDataLoadLog = dataLoadLogDao.getLastestDataLoadLogByGameKey(game.getGameKey());
 			game.setLatestDataLoadLog(latestDataLoadLog);
 		}
-	}
-
-	public DataLoadLog getLastestDataLoadLogByGameKey(int gameKey) {
-		return dataLoadLogDao.getLastestDataLoadLogByGameKey(gameKey);
 	}
 
 	public IDataLoadLogDao getDataLoadLogDao() {

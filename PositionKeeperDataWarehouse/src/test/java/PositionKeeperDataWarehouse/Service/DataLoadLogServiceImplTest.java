@@ -12,6 +12,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import PositionKeeperDataWarehouse.Entity.DataLoadLog;
 import PositionKeeperDataWarehouse.Entity.Game;
+import PositionKeeperDataWarehouse.Service.Interface.IGameService;
 
 public class DataLoadLogServiceImplTest {
 
@@ -35,13 +36,5 @@ public class DataLoadLogServiceImplTest {
 	public void testCreateDataLoadLog() {
 		List<Game> gameList = gameService.getAllGames();
 		dataLoadLogService.createDataLoadLog(gameList);
-	}
-	@Test
-	public void testGetLastestDataLoadLogByGameKey(){
-		List<Game> gameList = gameService.getAllGames();
-		for(Game game: gameList){
-			DataLoadLog dataLoadLog = dataLoadLogService.getLastestDataLoadLogByGameKey(game.getGameKey());
-			System.out.println(dataLoadLog.getDataLoadLogKey());
-		}
 	}
 }

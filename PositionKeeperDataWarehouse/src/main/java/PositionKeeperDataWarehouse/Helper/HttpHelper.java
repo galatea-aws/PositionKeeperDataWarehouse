@@ -72,6 +72,7 @@ public class HttpHelper {
 		BasicCookieStore cookieStore = new BasicCookieStore();
 		PoolingHttpClientConnectionManager cm = new PoolingHttpClientConnectionManager();
 	    cm.setMaxTotal(100);
+	    cm.setDefaultMaxPerRoute(40);
 		httpclient = HttpClients.custom()
 				.setDefaultCookieStore(cookieStore).setConnectionManager(cm).build();
 		RequestBuilder rb = RequestBuilder.post().setUri(new URI(loginUrl));
@@ -112,15 +113,16 @@ public class HttpHelper {
 	public String getHtml(String url) throws Exception{
 		RequestBuilder rb = RequestBuilder.get().setUri(new URI(url));
 		HttpUriRequest login = rb.build();
+		String html = "";
 		CloseableHttpResponse response = httpclient.execute(login);
 		try {
 			HttpEntity entity = response.getEntity();
-			String html = EntityUtils.toString(entity);
+			 html = EntityUtils.toString(entity);
 			EntityUtils.consume(entity);
-			return html;
 		} finally {
 			response.close();
 		}
+		return html;
 	}
 
 

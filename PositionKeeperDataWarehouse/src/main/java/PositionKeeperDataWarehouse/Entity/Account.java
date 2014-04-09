@@ -7,7 +7,6 @@ public class Account {
 	private String experience;
 	private String primaryInvestingStyle;
 	private String timeHorizon;
-	private String userId;
 	public int getAccountKey() {
 		return accountKey;
 	}
@@ -43,11 +42,5 @@ public class Account {
 	}
 	public void setTimeHorizon(String timeHorizon) {
 		this.timeHorizon = timeHorizon;
-	}
-	public String getUserId() {
-		return userId;
-	}
-	public void setUserId(String userId) {
-		this.userId = userId;
 	}
 }

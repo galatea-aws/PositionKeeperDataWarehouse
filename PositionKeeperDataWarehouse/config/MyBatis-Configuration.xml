@@ -6,5 +6,8 @@
         <mapper resource="AccountDaoMapper.xml"/>
         <mapper resource="GameDaoMapper.xml"/>
         <mapper resource="DataLoadLogDaoMapper.xml"/>
+        <mapper resource="GameStatusSnapshotDaoMapper.xml"/>
+        <mapper resource="ProductDaoMapper.xml"/>
+        <mapper resource="TradeHistoryDaoMapper.xml"/>
     </mappers>
 </configuration>

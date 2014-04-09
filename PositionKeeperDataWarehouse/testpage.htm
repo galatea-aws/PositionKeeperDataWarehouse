@@ -1,0 +1,1357 @@
+<!DOCTYPE html><html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+   
+<title>Investopedia Stock Simulator - Trade History</title><meta name="Keywords" content="stock market game, stock simulation, investing game, Stock quest, stock market simulation game, Fantasy stock trading game, competition, contest, trading system, options, education">
+<meta name="Description" content="Fantasy stock market game that simulates trading stocks and options.">
+<meta name="viewport" content="width=device-width, initial-scale=1"><link href="http://i.investopedia.com/inv/general/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+<link href="http://i.investopedia.com/vcb/assets_simulator/css/simulator_redesign_hybrid.css" media="screen" rel="stylesheet" type="text/css">
+<link href="http://i.investopedia.com/vcb/assets_simulator/css/mainnav_redesign.css" media="screen" rel="stylesheet" type="text/css"><script type="text/javascript" src="http://i.investopedia.com/vcb/assets_simulator/js/jquery-1.3.2.min.js"></script>
+<script type="text/javascript" src="http://i.investopedia.com/vcb/assets_simulator/js/cookie.js"></script>
+<script type="text/javascript" src="http://i.investopedia.com/vcb/assets_simulator/js/cookiemix.js"></script>
+<script type="text/javascript" src="http://i.investopedia.com/vcb/assets_simulator/js/g.js"></script>
+<script type="text/javascript" src="http://i.investopedia.com/vcb/assets_simulator/js/microsoftAjax.js"></script>
+<script type="text/javascript" src="http://i.investopedia.com/vcb/assets_simulator/js/microsoftAjaxWebForms.js"></script>
+<script type="text/javascript" src="http://i.investopedia.com/simulator_ui/js/ScrollingTicker.js"></script>
+    <!-- fixed Top of the page blank line -->
+    <style type="text/css"> body>img{float: left} </style>
+    <!-- Smart Pixel -->
+    <script type="text/javascript">
+        /* <![CDATA[ */
+        var google_conversion_id = 1010065244;
+        var google_conversion_label = "zhBOCLSXsgUQ3L7R4QM";
+        var google_conversion_format = 3;
+        var google_custom_params = {FIN_interest:["ACTIVETRADER", "OPT_FUT", "STOCKS", "ETF", "INVEST"],ACCT_type:"BROK", FIN_zip:"06473", FIN_state:"CT"};
+        var google_remarketing_only = true;
+        /* ]]> */
+    </script>
+    <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+    </script>
+    <noscript>
+        <div style="display:inline;">
+            <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1010065244/?value=0&amp;label=zhBOCLSXsgUQ3L7R4QM&amp;guid=ON&amp;script=0"/>
+        </div>
+    </noscript>
+    <!-- End Smart Pixel -->
+   
+</head>
+<body onunload="SaveTickerPos();">
+<div class="main">
+<div style="display:none;">
+    <!-- Start of DoubleClick Spotlight Tag: Please do not remove -->
+    <!-- Activity Name for this tag is:IP Simulator -->
+    <!-- Web site URL where tag should be placed: http://www.investopedia.com/simulator -->
+    <!-- This tag must be placed within the opening <body> tag, as close to the beginning of it as possible -->
+    <!-- Creation Date: Thu Jul 02 17:02:35 EDT 2009 -->
+    <script language="JavaScript">
+    	
+        function SaveTickerPos()
+        {
+            try
+            {
+                for (var obj in allTickers){
+                    allTickers[obj].paused = true;
+                    jQuery.cookie(allTickers[obj].cookieName, allTickers[obj].x, {path: '/'});
+                }
+            }
+            catch(e){}
+        }
+
+        var axel = Math.random() + "";
+        var a = axel * 10000000000000;
+        document.write('<img src="http://ad.doubleclick.net/activity;src=2359949;type=ips;cat=ips;ord=1;num=' + a + '?" width=1 height=1 border=0>');
+    </script>
+    <noscript>
+        <img src="http://ad.doubleclick.net/activity;src=2359949;type=ips;cat=ips;ord=1;num=1?" width=1 height=1 border=0>
+    </noscript>
+    <!-- End of DoubleClick Spotlight Tag: Please do not remove -->
+
+    <!-- Begin comScore Tag -->
+    <script type="text/javascript" language="javascript">
+            var _comscore = _comscore || [];
+        _comscore.push({ c1: "2", c2: "6034722", c4: "http://www.investopedia.com/simulator/trade/tradeoverview.aspx" });
+        (function() {
+            var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+            s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+            el.parentNode.insertBefore(s, el);
+        })();
+    </script>
+    <noscript>
+        <img src="http://b.scorecardresearch.com/p?c1=2&c2=6034722&c4=http://www.investopedia.com/simulator/trade/tradeoverview.aspx&cv=2.0&cj=1" />
+    </noscript>
+    <!-- End comScore Tag -->
+</div>
+<script type='text/javascript' language="JavaScript">
+    //<![CDATA[
+    if (getCookie('freenewsletterreg') == null) {
+        setCookie("freenewsletterreg", "ad", 30);
+    }
+    //]]>
+</script>
+
+
+<!--<script type='text/javascript' src="http://www.investopedia.com/simulator/Common/VcidScript.ashx?u=e3bfd87f21d741578241089c9aa5f4c8"></script>-->
+<script type='text/javascript'>
+    (function() {
+        var useSSL = 'https:' == document.location.protocol;
+        var src = (useSSL ? 'https:' : 'http:') + '//www.googletagservices.com/tag/js/gpt.js';
+        document.write('<scr' + 'ipt src="' + src + '"></scr' + 'ipt>');
+    })();
+</script><!-- YieldBot Intent Tag -->
+<script type="text/javascript" src="http://cdn.yb0t.com/js/yieldbot.intent.js"><script>
+<script type="text/javascript">
+    yieldbot.pub('e4e6');
+    yieldbot.defineslot('728x90-banner');
+    yieldbot.defineslot('300x250-banner');
+    yieldbot.go();
+</script>
+<!-- End Yieldbot.com Intent Tag -->
+
+        <script type='text/javascript'>
+                var hasFlash = (function() {
+                    if (typeof navigator.plugins != "undefined" && typeof navigator.plugins["Shockwave Flash"] == "object") {
+                        return true;
+                    } else if (typeof window.ActiveXObject != "undefined") {
+                        try {
+                            new ActiveXObject("ShockwaveFlash.ShockwaveFlash");
+                            return true;
+                        } catch (e) { }
+                    }
+                    return false;
+                })();
+                var maxScreenWidth = "2600";
+                try {
+                    if (screen.width <= 1000) maxScreenWidth = "1000";
+                    else if (screen.width <= 1200 && screen.width > 1000) maxScreenWidth = "1200";
+                    else if (screen.width <= 1400 && screen.width > 1200) maxScreenWidth = "1400";
+                    else if (screen.width <= 1600 && screen.width > 1400) maxScreenWidth = "1600";
+                } catch (e) { }
+
+                function getDfpReferrerHost() {
+                    var ref = document.referrer;
+                    if ((ref == null) || (ref.length == 0)) return 'Direct';
+                    ref = ref.toLowerCase();
+                    if (ref.indexOf('http://') == 0) ref = ref.substring(7);
+                    if (ref.indexOf('https://') == 0) ref = ref.substring(8);
+                    if (ref.indexOf('/') >= 0) ref = ref.substring(0, ref.indexOf('/'));
+                    return ref;
+                }
+
+                function getDfpReferrerSearch() {
+                    var refHost = getDfpReferrerHost();
+                    if (refHost.indexOf('.google.') >= 0) return 'True';
+                    if (refHost.indexOf('.bing.') >= 0) return 'True';
+                    if (refHost.indexOf('.yahoo.') >= 0) return 'True';
+                    if (refHost.indexOf('.ask.') >= 0) return 'True';
+                    if (refHost.indexOf('.aol.') >= 0) return 'True';
+                    return 'False';
+                }
+
+                googletag.cmd.push(function() {
+                        googletag.defineSlot('/8397/INV-NA/Investing/Investing/AF-Right-Skyscraper/Homepage', [160, 600], 'AdSlot_AF-Right-Skyscraper').addService(googletag.pubads()).setTargeting("Location", "AF-Right-Skyscraper");
+                        googletag.defineSlot('/8397/INV-NA/Investing/Investing/AF-Top-Leaderboard/Homepage', [[728, 90], [970, 66]], 'AdSlot_AF-Top-Leaderboard').setTargeting("Location", "AF-Top-Leaderboard").setTargeting('ybot_ad', yieldbot.adAvailable('728x90-banner')).setTargeting('ybot_slot','728x90-banner').addService(googletag.pubads());
+                        googletag.defineSlot('/8397/INV-NA/Investing/Investing/BF-Right-Button1/Homepage', [[120, 60],[120,90]], 'AdSlot_BF-Right-Button1').addService(googletag.pubads()).setTargeting("Location", "BF-Right-Button1");
+                        googletag.defineSlot('/8397/INV-NA/Investing/Investing/BF-Right-Button2/Homepage', [[120, 60],[120,90]], 'AdSlot_BF-Right-Button2').addService(googletag.pubads()).setTargeting("Location", "BF-Right-Button2");
+                        googletag.defineSlot('/8397/INV-NA/Investing/Investing/IC-Textlink1/Homepage', [[680, 20], [680, 40]], 'AdSlot_IC-Textlink1').addService(googletag.pubads()).setTargeting("Location", "IC-Textlink1");
+                        googletag.defineSlot('/8397/INV-NA/Investing/Investing/IC-Textlink2/Homepage', [[680, 20], [680, 40]], 'AdSlot_IC-Textlink2').addService(googletag.pubads()).setTargeting("Location", "IC-Textlink2");
+                        googletag.pubads().setTargeting('Type', 'Homepage');
+                        googletag.pubads().setTargeting('URLKey', '');
+                        googletag.pubads().setTargeting('URL', '/simulator/trade/tradeoverview.aspx');
+                        googletag.pubads().setTargeting('ReferrerHost', getDfpReferrerHost());
+                        googletag.pubads().setTargeting('ReferrerSearch', getDfpReferrerSearch());
+                        googletag.pubads().setTargeting('DFP_VCBAUDSEG', ['Investors','Active Traders','Active Traders:Instrument-Stocks','Investors:Instrument-Stocks','Investors:Instrument-ETF','Active Traders:Instrument-Options&Futures','Active Traders:Account-Brokerage','Investors:Account-Brokerage']);
+
+                        googletag.pubads().set('page_url', 'http://www.investopedia.com/simulator/trade/tradeoverview.aspx');
+                        googletag.pubads().enableAsyncRendering();
+                        googletag.enableServices();
+                });
+        </script>
+<!-- TMS -->
+<script>
+  (function(e){var t='313',n=document,r,i,s={http:'http://cdn.mplxtms.com/s/MasterTMS.min.js',https:'https://secure-cdn.mplxtms.com/s/MasterTMS.min.js'},o=s[/\w+/.exec(window.location.protocol)[0]];i=n.createElement('script'),i.type='text/javascript',i.async=!0,i.src=o+'#'+t,r=n.getElementsByTagName('script')[0],r.parentNode.insertBefore(i,r),i.readyState?i.onreadystatechange=function(){if(i.readyState==='loaded'||i.readyState==='complete')i.onreadystatechange=null}:i.onload=function(){try{e()}catch(t){}}})(function(){});
+</script>
+<!-- End TMS -->
+<!-- Google Analytics -->
+<script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-6319545-2']);
+    _gaq.push(['_trackPageview']);
+    _gaq.push(['_trackEvent', 'Channel', 'Pageview', 'Investing:', 1, true]);
+    _gaq.push(['_trackEvent', 'Advertising', 'Pageview', 'Investing:', 1, true]);
+    _gaq.push(['_trackEvent', 'Timelessness', 'Pageview', 'Timeless', 1, true]);
+  (function() {
+    var ga = document.createElement('script');
+    ga.type = 'text/javascript';
+    ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+<!-- End Google Analytics -->
+<!-- Page Taxonomy -->
+<script type="text/javascript">
+//<![CDATA[
+  var _pageTaxonomy = {
+    "URLKey": "",
+    "Hashkey": "",
+    "Channel": "Investing",
+    "SubChannel": "",
+    "Advertising": "Investing",
+    "SubAdvertising": "",
+    "AdTarget": "investopedia.com",
+    "DfpTarget": "Investing/Investing",
+    "Tags": null,
+    "Type": "Landing",
+    "Lucrativeness": null,
+    "Timelessness": "Timeless",
+    "Feature": "",
+    "Design": "",
+    "InterestLevel": null,
+  };
+//]]>
+</script>
+<!-- End Page Taxonomy -->
+<!-- Infolinks -->
+<script type="text/javascript">
+  var infolink_pid = 383103;
+  var infolink_wsid = 0;
+</script>
+<script type="text/javascript" src="http://resources.infolinks.com/js/infolinks_main.js"></script>
+<!-- End Infolinks -->
+<div style=" width:985px;margin: 0 auto">
+<div style="width:990px;background-image:url(http://i.investopedia.com/inv/general/leaderbg.gif);background-repeat:repeat-x;text-align:center;background-color:#ffffff;padding-top:5px;">
+    <span id="ctl00_AdLeaderBoard1_cgiAdTopLeaderboard">
+        <div id='AdSlot_AF-Top-Leaderboard'>
+  <script type="text/javascript">
+    googletag.cmd.push(function() { googletag.display('AdSlot_AF-Top-Leaderboard'); });
+  </script>
+</div>    </span>
+</div>
+<div style="padding:2px 0px 0px 0px;">
+    <!--[if lt IE 7]>
+    <script type="text/javascript" src="http://i.investopedia.com/inv/nav/modules/js/jquery/jquery.dropdown.js"></script>
+    <![endif]-->
+    <ul id="nav2" class="dropdown dropdown-horizontal">
+        <li ><a href="http://www.investopedia.com/">Home</a></li>
+        <li class="dir" style="0 2px"><a href="http://www.investopedia.com/dictionary/">Dictionary</a>
+            <ul>
+                <li><a href="http://www.investopedia.com/categories/acronyms.asp">Acronyms</a></li>
+                <li><a href="http://www.investopedia.com/categories/bonds.asp">Bonds</a></li>
+                <li><a href="http://www.investopedia.com/categories/buzzwords.asp">Buzzwords</a></li>
+                <li><a href="http://www.investopedia.com/categories/forex.asp">FOREX</a></li>
+                <li><a href="http://www.investopedia.com/categories/mutualfunds.asp">Mutual Funds</a></li>
+                <li><a href="http://www.investopedia.com/categories/optionsandfutures.asp">Options &amp; Futures</a></li>
+                <li><a href="http://www.investopedia.com/categories/retirementplanning.asp">Retirement</a></li>
+                <li><a href="http://www.investopedia.com/categories/stocks.asp">Stocks</a></li>
+                <li><a href="http://www.investopedia.com/categories/taxes.asp">Taxes</a></li>
+                <li><a href="http://www.investopedia.com/categories/technicalanalysis.asp">Tech Analysis</a></li>
+                <li><a href="http://www.investopedia.com/categories/tradingterms.asp">Trading</a></li>
+            </ul>
+        </li>
+        <li class="dir" ><a href="http://www.investopedia.com/articles/">Articles</a>
+            <ul>
+                <li><a href="http://www.investopedia.com/markets/stock-analysis/">Stock Analysis</a></li>
+                <li><a href="http://www.investopedia.com/articles/basics/">Investing Basics</a></li>
+                <li><a href="http://www.investopedia.com/articles/stocks/">Stocks</a></li>
+                <li><a href="http://www.investopedia.com/articles/mutualfund/">Mutual Funds</a></li>
+                <li><a href="http://www.investopedia.com/articles/forex/">FOREX</a></li>
+                <li><a href="http://www.investopedia.com/articles/exchangetradedfunds/" title="ETFs">ETFs</a></li>
+                <li><a href="http://www.investopedia.com/articles/trading/">Active Trading</a></li>
+                <li><a href="http://www.investopedia.com/articles/bonds/">Bonds</a></li>
+                <li><a href="http://www.investopedia.com/articles/financial-theory/">Financial Theory</a></li>
+                <li><a href="http://www.investopedia.com/articles/fundamental-analysis/">Fundamental Analysis</a></li>
+                <li><a href="http://www.investopedia.com/articles/options-and-futures/">Options &amp; Futures</a></li>
+                <li><a href="http://www.investopedia.com/articles/pf/">Personal Finance</a></li>
+                <li><a href="http://www.investopedia.com/articles/mortgages-real-estate/">Real Estate &amp; Mortgages</a></li>
+                <li><a href="http://www.investopedia.com/articles/retirement/">Retirement</a></li>
+                <li><a href="http://www.investopedia.com/ask/">FAQs</a></li>
+                <li><a href="http://www.investopedia.com/articles/">View All</a></li>
+            </ul>
+        </li>
+        <li class="dir"><a href="http://www.investopedia.com/university/">Tutorials</a>
+            <ul>
+                <li><a href="http://www.investopedia.com/university/features.asp">Special Features</a></li>
+                <li><a href="http://www.investopedia.com/university/all/basics/">Beginners</a></li>
+                <li><a href="http://www.investopedia.com/university/all/trading/">Experienced Investors</a></li>
+                <li><a href="http://www.investopedia.com/university/all/trading/">Active Traders</a></li>
+                <li><a href="http://www.investopedia.com/university/all/retirement/">Retirement</a></li>
+            </ul>
+        </li>
+        <li class="dir"><a href="http://www.investopedia.com/professionals/">Exam Prep</a>
+            <ul>
+                <li><a href="http://www.investopedia.com/exam-prep-quizzes/">Quizzes</a></li>
+                <li><a href="http://www.investopedia.com/professionals/cfa/">CFA Level I</a></li>
+                <li><a href="http://www.investopedia.com/professionals/cfa/level2/">CFA Level II</a></li>
+                <li><a href="http://www.investopedia.com/professionals/cfa/level3/">CFA Level III</a></li>
+                <li><a href="http://www.investopedia.com/professionals/series6/">Series 6</a></li>
+                <li><a href="http://www.investopedia.com/professionals/series7/">Series 7</a></li>
+                <li><a href="http://www.investopedia.com/professionals/series26/">Series 26</a></li>
+                <li><a href="http://www.investopedia.com/professionals/series63/">Series 63</a></li>
+                <li><a href="http://www.investopedia.com/professionals/series65/">Series 65</a></li>
+                <li><a href="http://www.investopedia.com/professionals/series66/">Series 66</a></li>
+                <li><a href="http://www.investopedia.com/professionals/csc/">CSC</a></li>
+                <li><a href="http://www.investopedia.com/professionals/usarchive/">More Exams...</a></li>
+            </ul>
+        </li>
+        <li style="padding-right: 25px;background-image:url(http://i.investopedia.com/inv/nav/febg-l.gif); background-repeat:repeat-x;background-position: 100% 50%;background-repeat: no-repeat;"><a href="http://www.investopedia.com/forex/">Forex</a></li>
+        <li style="padding-right: 25px;background-image:url(http://i.investopedia.com/inv/nav/febg-l.gif); background-repeat:repeat-x;background-position: 100% 50%;background-repeat: no-repeat;"><a href="http://www.investopedia.com/markets/">Markets</a></li>
+        <li class="dir"><a href="http://www.investopedia.com/simulator/">Simulator</a>
+            <ul>
+                <li><a href="http://www.investopedia.com/simulator/">Home</a></li>
+                <li><a href="http://www.investopedia.com/simulator/portfolio/">Portfolio</a></li>
+                <li><a href="http://www.investopedia.com/simulator/trade/tradestock.aspx">Trade Stock</a></li>
+                <li><a href="http://www.investopedia.com/simulator/game/">Games</a></li>
+                <li><a href="http://www.investopedia.com/simulator/markets/">Resources</a></li>
+                <li><a href="http://www.investopedia.com/accounts/login.aspx?returnurl=http://www.investopedia.com/simulator" id="SignIn" rel="nofollow">Login</a></li>
+            </ul>
+        </li>
+        <li><a href="http://www.investopedia.com/articles/pf/">Financial Edge</a></li>
+        <li class="dirfree"><a href="http://www.investopedia.com/free/">Free Tools</a>
+            <ul>
+                <li><a href="http://www.investopedia.com/free/stockadvice/">Stock Ideas</a></li>
+                <li><a href="http://investopedia.ar.wilink.com" target="_blank" rel="nofollow">Free Annual Reports</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://investopedia.ar.wilink.com"><img style="border:0; vertical-align:middle;" src="http://i.investopedia.com/inv/nav/precision-ir-nav-icon.gif" alt="Free Annual Reports" title="Free Annual Reports"/></a></li>
+                <li><a href="http://www.investopedia.com/free/">Guides and Books</a></li>
+                <li><a href="http://www.investopedia.com/free/">Learn About Futures</a></li>
+                <li><a href="http://www.investopedia.com/free/">Mortgage Offers</a></li>
+                <li><a href="http://www.investopedia.com/free/">Investing Strategies</a></li>
+                <li><a href="http://www.investopedia.com/calculator/">Financial Calculators</a></li>
+            </ul>
+        </li>
+    </ul>
+</div>
+</div>
+
+<div style="clear:both;" id="header">
+<div class="headerbox" >
+
+  <div style="width:294px;float:left;"><a href="http://www.investopedia.com/"><img src="http://i.investopedia.com/vcb/assets_simulator/img/maininvlogo-r.gif" width="302" height="64" border="0" alt="Investopedia" /></a></div>
+
+    <div style="width:565px; overflow:hidden; float:left; margin:0px 0px 0px 110px;">
+
+        <div style="width:565px;overflow:hidden;">
+            <div style="width:600px; float:left;">
+				                <table id="ctl00_Header1_LoginStatus1_LoggedInTable" width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top:8px;">
+                    <tr>
+                        <td style="width:34%" valign="top">
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td>
+                                        <div style="float:left;color:#fff;font-weight:bold;">Hi&nbsp;</div>
+                                        <div style="float:left;width:100px;overflow:hidden;margin-right:3px;color:#fff;font-weight:bold;overflow:hidden;">
+                                            <a href="http://www.investopedia.com/accounts/manageprofile.aspx" style="color:#fff;" rel="nofollow">
+                                                <span id="ctl00_Header1_LoginStatus1_UsernameLabel">Wei Sun</span>
+                                            </a>
+                                        </div>
+                                        <div style="float:left;color:#fff">
+                                            (<a id="Logout" href="http://www.investopedia.com/accounts/logout.aspx?returnurl=http://www.investopedia.com/simulator/" target="_top" style="font:normal 11px arial;color:#ffffff;" rel="nofollow">Sign Out</a>)
+                                        </div>
+                                        &nbsp;&nbsp;
+                                    </td>
+                                    <td style="height: 18px">
+                                        <a href="http://www.investopedia.com/accounts/manageprofile.aspx#subscriptions" id="NewsletterLoggedIn"
+                                           target="_top" rel="nofollow" style="text-decoration: none">
+                                            <img src="http://i.investopedia.com/simulator_ui/freenews.gif" alt="Investopedia Free Newsletter" width="176" height="20" border="0" />
+                                        </a>
+                                        <a href="http://investopedia.ar.wilink.com" rel="nofollow"  style="text-decoration: none"><img src="http://i.investopedia.com/inv/nav/free-annual-rp.jpg" alt="Free Annual Reports" style="border:0px;" /></a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+					            </div>
+        </div>
+
+        <div style="float:left;width:565px; overflow:hidden;">
+
+            <div style="width:365px;float:left;overflow:hidden;">
+
+
+                <div style="width:270px;float:left;">
+                    <input name="keyword" type="text" id="keyword" value="enter keywords" onKeyDown="if (event.keyCode == 13) { if (event.stopPropagation) event.stopPropagation(); if (event.preventDefault) event.preventDefault(); event.returnValue = false; event.cancel = true; document.getElementById('searchKeywordButton').click(); }" onClick="this.value=''" style="width:261px;border:solid 3px #315f86; height:18px;color:#666666;padding-top:2px;" /></div>
+                <div style="width:70px;float:left;margin-top:1px;">
+                    <input type="submit" name="searchKeywordButton" value="Search" id="searchKeywordButton" />
+                </div>
+
+                <script type="text/javascript">
+                    (function($) {
+
+                        $(document).ready(function() {
+
+                            $('#searchKeywordButton').click(function() {
+                                var query = $("#keyword").val();
+                                if (query == 'enter keywords' || query == '')
+                                    return false;
+								window.location.href = 'http://www.investopedia.com/search/default.aspx?q='+encodeURIComponent(query);
+                            });
+
+                        });
+
+                    })(jQuery);
+                </script>
+            </div>
+
+            <div style="float:left;width:200px;overflow:hidden;">
+
+                <div style="width:95px;float:left;">
+                    <input name="symbol" type="text" value="enter symbol" maxlength="10" id="SearchQuotes1_symbol" onKeyDown="if (event.keyCode == 13) { if (event.stopPropagation) event.stopPropagation(); if (event.preventDefault) event.preventDefault(); event.returnValue = false; event.cancel = true; document.getElementById('SearchQuotes1_quoteSymbolButton').click(); }" onClick="this.value=''" style="border:solid 3px #315f86; height:18px;width:85px;color:#666666;padding-top:2px;" />
+                </div>
+                <div style="width:80px;float:left;margin-top:1px;">
+                    <input name="quoteSymbolButton" type="button" id="SearchQuotes1_quoteSymbolButton" value="Get Quote" style="font-weight:bold; width:75px;height:25px;" />
+                </div>
+
+				<script type="text/javascript">
+					(function($) {
+
+						$(document).ready(function() {
+
+							$('#SearchQuotes1_quoteSymbolButton').click(function() {
+								var query = $("#SearchQuotes1_symbol").val();
+								if (query == 'enter symbol' || query == '')
+									return false;
+								window.location.href = 'http://www.investopedia.com/markets/stocks/'+encodeURIComponent(query).toLowerCase()+'/';
+							});
+
+						});
+
+					})(jQuery);
+				</script>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+</div>
+<div style=" background-repeat:repeat-y;width:985px; margin:0 auto">
+<div class="tickerPanel">
+    <div id="divTicker" style="overflow:hidden;position:relative;text-align:left;padding:0px;margin:0px;width:984px;height:15px;">
+
+      
+    </div>
+</div>
+        		 <style type="text/css">
+        				#ctl00_cgiAdTextLink1 iframe, #ctl00_cgiAdTextLink2 iframe { width:auto !important; height:38px !important; line-height:14px !important;}
+        		</style>
+<div style="width:989px;overflow:hidden;margin:1px 5px 0px 0px; clear: both">
+    <div style="width:760px;margin:0px auto;text-align:center;">
+        <div style="width:320px;float:left;margin:10px 0px 5px 40px; min-height:13px;">
+            <span id="ctl00_cgiAdTextLink2" style='display:none'>
+                <div id='AdSlot_IC-Textlink2'>
+  <script type="text/javascript">
+    googletag.cmd.push(function() { googletag.display('AdSlot_IC-Textlink2'); });
+  </script>
+</div>            </span>
+           
+        		
+        </div>
+        <div style="width:320px;float:left;margin:10px 0px 5px 40px; min-height:13px;">
+	        <span id="ctl00_cgiAdTextLink1" style='display:none'>
+                <div id='AdSlot_IC-Textlink1'>
+  <script type="text/javascript">
+    googletag.cmd.push(function() { googletag.display('AdSlot_IC-Textlink1'); });
+  </script>
+</div>            </span>
+        </div>
+        <div style="clear:both;"></div>
+    </div>
+
+<div style="width:800px;float:left;">
+
+
+
+<div style="padding:5px 0px 10px 0px;">
+
+<div>
+        <div class="menu">
+        <div class="menu_tab1">
+            <div class="menu_img"><a href="http://www.investopedia.com/simulator/"><img src="http://i.investopedia.com/simulator_ui/nav_menu/stock_graph_menu.gif" width="46" height="31" alt="Stock Simulator" border="0" /></a></div>
+            <div class="menu_title"><a href="http://www.investopedia.com/simulator/">Stock<br />Simulator</a></div>
+        </div>
+        <div style="width:648px;overflow:hidden;float:left;">
+            <a id="hlHome" class="menu_tab_sml" href="http://www.investopedia.com/simulator/">My Home</a>
+            <a id="hlPortfolio" class=" menu_tab_selected menu_tab_lrg" href="http://www.investopedia.com/simulator/portfolio/">Portfolio</a>
+            <a id="hlTrading" class="menu_tab_sml" href="http://www.investopedia.com/simulator/trade/tradestock.aspx">Trade</a>
+            <a id="hlRankings" class="menu_tab_lrg" href="http://www.investopedia.com/simulator/ranking/">Rankings</a>
+            <a id="hlMarket" class="menu_tab_sml" href="http://www.investopedia.com/simulator/markets/">Markets</a>
+            <a id="hlAwards" class="menu_tab_sml" href="http://www.investopedia.com/simulator/portfolio/awards.aspx">Awards</a>
+            <a id="hlGames" class="menu_tab_sml" href="http://www.investopedia.com/simulator/game/">Games</a>
+            <div class="menu_tab_sml"></div>
+        </div>
+    </div>
+    <div>
+    <div class="sub_tabssponsor">
+        <div style="float: left; margin:10px 0px 0px 5px;width:635px;">
+            <a href="http://www.investopedia.com/simulator/portfolio/topstocks.aspx">Most Popular Buys and Shorts</a>&nbsp;&nbsp;|
+            &nbsp;&nbsp;<a href="http://www.investopedia.com/simulator/trade/tradeoverview.aspx">Trade History</a>&nbsp;&nbsp;|
+            &nbsp;&nbsp;<a href="http://www.investopedia.com/simulator/trade/corporateactionhistory.aspx">Corporate Action History</a>&nbsp;&nbsp;|
+            &nbsp;&nbsp;<a href="http://www.investopedia.com/simulator/portfolio/performancehistory.aspx">Performance History</a>&nbsp;&nbsp;|
+            &nbsp;&nbsp;<a href="http://www.investopedia.com/simulator/portfolio/relatedstockanalysis.aspx">Related Stock Analysis</a>
+        </div>
+        <div style="float:right; width: 150px; margin-top:10px;">
+    <div style="padding: 0px 5px 0px 0px; float: left; width: 16px;">
+        <a href="http://www.investopedia.com/simulator/messages/messages.aspx">
+            <img src="http://i.investopedia.com/Research/community/message.png" width="16" height="16" border="0" alt="View Your Messages" title="View Your Messages"/>
+        </a>
+    </div>
+            <span id="messagesLink2" style="padding-right:5px; width: 100%;">
+             <a href="http://www.investopedia.com/simulator/messages/messages.aspx" title="View Your Messages">My Messages</a>
+            </span>
+    <span><a href="http://www.investopedia.com/simulator/help/">Help</a></span>
+</div>    </div>
+</div>
+
+</div>
+<div style="padding-bottom:30px;">
+
+<div class="q_page_cont">
+
+				<div style="width:800px;"><h1><span>Game: <i>Investopedia Competition (No End)</i> -  <i>sron's</i> Trade History</span></h1></div>
+		<div style="clear:both;"></div><br />
+			
+	<div>
+	<input type="hidden" name="hTType" id="ctl00_MainPlaceHolder_currencyFilter_hTType" />
+	<input type="hidden" name="hTId" id="ctl00_MainPlaceHolder_currencyFilter_hTId" />
+	<input type="submit" name="btnCancelTrade" value="" id="ctl00_MainPlaceHolder_currencyFilter_btnCancelTrade" style="display:none;" />
+    <div id="divPortfolioDetails" style="width:100%;overflow:visible;display:none;">		
+		    </div>
+
+<script type="text/javascript">
+	
+    function ConfirmCancellation(lStatus, ttype, tId, isEditable)
+    {
+        var hlStatus = document.getElementById(lStatus);
+        hlStatus.innerHTML = "Cancel Order?" + 
+                            "<BR><a href='javascript:CancelTrade(\"" + ttype + "\", " + tId + ", \"" + lStatus + "\")'>Yes</a>" + 
+                            "&nbsp;&nbsp;&nbsp;&nbsp;" + 
+                            "<a href='javascript:IgnoreCancellation(\"" + lStatus + "\", \"" + ttype + "\", " + tId + ", " + isEditable + ")'>No</a>";
+    }
+
+    function CancelTrade(tType, tId, lStatus)
+    {
+		var hTType = document.getElementById("ctl00_MainPlaceHolder_currencyFilter_hTType"); 
+		var hTId = document.getElementById('ctl00_MainPlaceHolder_currencyFilter_hTId');
+		hTType.value = tType;
+		hTId.value = tId;
+
+		var btn = document.getElementById('ctl00_MainPlaceHolder_currencyFilter_btnCancelTrade');
+        btn.value = 1;
+		var hlStatus = document.getElementById(lStatus);
+		hlStatus.innerHTML = "<span style='color:#808080'>Canceling</span>";
+		btn.click();
+    }
+
+    function IgnoreCancellation(lStatus, ttype, tId, isEditable)
+    {
+        var hlStatus = document.getElementById(lStatus);
+        hlStatus.innerHTML = "<a style='color:#94000B' href='javascript:ConfirmCancellation(\"" + lStatus + "\", \"" + ttype + "\", " + tId + ", " + isEditable + ")'>Cancel</a>";
+        if (isEditable)
+        	hlStatus.innerHTML += "&nbsp;<a style='color:#94000B' href='http://www.investopedia.com/simulator/trade/tradestock.aspx?editID=" + tId + "'>Edit</a>";
+    }
+	    
+</script>
+</div>
+		<div style="margin-bottom:10px;width:800px;">
+			<script type="text/javascript" src="http://i.investopedia.com/simulator_ui/js/ddaccordion.js"></script>
+	<script type="text/javascript">
+		//<![CDATA[
+		ddaccordion.init({
+			headerclass: "infobar-drop", //Shared CSS class name of headers group that are expandable
+			contentclass: "infobar-dropcontent", //Shared CSS class name of contents group
+			revealtype: "click", //Reveal content when user clicks or onmouseover the header? Valid value: "click", "clickgo", or "mouseover"
+			mouseoverdelay: 200, //if revealtype="mouseover", set delay in milliseconds before header expands onMouseover
+			collapseprev: true, //Collapse previous content (so only one open at any time)? true/false 
+			defaultexpanded: [], //index of content(s) open by default [index1, index2, etc]. [] denotes no content
+			onemustopen: false, //Specify whether at least one header should be open always (so never all headers closed)
+			animatedefault: false, //Should contents open by default be animated into view?
+			persiststate: false, //persist state of opened contents within browser session?
+			toggleclass: ["", "openheader"], //Two CSS classes to be applied to the header when it's collapsed and expanded, respectively ["class1", "class2"]
+			togglehtml: ["prefix", "", ""], //Additional HTML added to the header when it's collapsed and expanded, respectively  ["position", "html1", "html2"] (see docs)
+			animatespeed: "normal", //speed of animation: integer in milliseconds (ie: 200), or keywords "fast", "normal", or "slow"
+			oninit:function(headers, expandedindices){ //custom code to run when headers have initalized
+				//do nothing
+			},
+			onopenclose:function(header, index, state, isuseractivated){ //custom code to run whenever a header is opened or closed
+				//do nothing
+			}
+		})
+		//]]>
+	</script>
+<div class="infobar-container">
+	<div class="infobar-main">
+		<div class="infobar-header">
+			<div class="infobar-title"><p><strong>Account Value (<span id="ctl00_MainPlaceHolder_currencyFilter_ctrlPortfolioDetails_PortfolioSummary_lblCurrencyType" style="font-size:9px;">USD</span>):</strong> <span id="ctl00_MainPlaceHolder_currencyFilter_ctrlPortfolioDetails_PortfolioSummary_lblAccountValue" style="font-size:9px;">$1,597,992,068.96</span> <a href="#" class="infobar-drop"  headerindex="0h"><img src="http://i.investopedia.com/research/icons/help.png" width="16" height="16" border="0" style="vertical-align:bottom;" alt="What is this?" /></a></p></div>
+			<div class="infobar-title"><p><strong>Buying Power:</strong> <span id="ctl00_MainPlaceHolder_currencyFilter_ctrlPortfolioDetails_PortfolioSummary_lblBuyingPower" style="font-size:9px;">$1,054,750,268.96</span> <a href="#" class="infobar-drop"  headerindex="0h"><img src="http://i.investopedia.com/research/icons/help.png" width="16" height="16" border="0" style="vertical-align:bottom;" alt="What is this?" /></a></p></div>
+			<div class="infobar-title"><p><strong>Cash:</strong> <span id="ctl00_MainPlaceHolder_currencyFilter_ctrlPortfolioDetails_PortfolioSummary_lblCash" style="font-size:9px;">$511,508,468.96</span> <a href="#" class="infobar-drop"  headerindex="0h"><img src="http://i.investopedia.com/research/icons/help.png" width="16" height="16" border="0" style="vertical-align:bottom;" alt="What is this?" /></a></p></div>
+			<div class="infobar-title"><p><strong>Annual Return:</strong> <span id="ctl00_MainPlaceHolder_currencyFilter_ctrlPortfolioDetails_PortfolioSummary_lblAnnualReturn" style="font-size:9px;">455.20 %</span> <a href="#" class="infobar-drop"  headerindex="0h"><img src="http://i.investopedia.com/research/icons/help.png" width="16" height="16" border="0" style="vertical-align:bottom;" alt="What is this?" /></a></p></div>
+		</div>
+		
+		<div class="clear"></div>
+		<div class="infobar-sub infobar-dropcontent" style="display:none;">
+			<p class="infobar-close"><a href="#" onClick="ddaccordion.collapseone('infobar-drop', 0); return false" class="infobar-closebtn"><img src="http://i.investopedia.com/simulator_ui/icons/sm-close-icon2.gif" width="15" height="15" alt="Close" border="0" /></a></p>
+			<p><strong>Account Value:</strong>  Your portfolio's current value.</p>
+			<p>Calculated as: = cash + market value of stocks + market value of options - market value of shorted stocks</p>
+		</div>
+		<div class="clear"></div>
+		<div class="infobar-sub infobar-dropcontent" style="display:none;">
+			<p class="infobar-close" style=";padding:0 0 0 10px;"><a href="#" onClick="ddaccordion.collapseone('infobar-drop', 1); return false" class="infobar-closebtn"><img src="http://i.investopedia.com/simulator_ui/icons/sm-close-icon2.gif" width="15" height="15" alt="Close" border="0" /></a></p>
+			<p><strong>Buying Power:</strong> The total value of your cash and margin accounts that can be used to trade stocks. Negative buying power indicates that no further trading can be performed and that margin call will occur. </p>
+			<p>Calculated as: =cash + (Long Stocks x 50%) - (Shorted Stocks x 150%)</p>
+		</div>
+		<div class="clear"></div>
+		<div class="infobar-sub infobar-dropcontent" style="display:none;">
+			<p class="infobar-close"><a href="#" onClick="ddaccordion.collapseone('infobar-drop', 2); return false" class="infobar-closebtn"><img src="http://i.investopedia.com/simulator_ui/icons/sm-close-icon2.gif" width="15" height="15" alt="Close" border="0" /></a></p>
+			<p><strong>Cash:</strong> Total amount of cash available for trading stocks with. A negative cash value indicates that you are borrowing from your margin account.</p>
+		</div>
+		<div class="clear"></div>
+		<div class="infobar-sub infobar-dropcontent" style="display:none;">
+			<p class="infobar-close"><a href="#" onClick="ddaccordion.collapseone('infobar-drop', 3); return false" class="infobar-closebtn"><img src="http://i.investopedia.com/simulator_ui/icons/sm-close-icon2.gif" width="15" height="15" alt="Close" border="0" /></a></p>
+			<p><strong>Annual Return:</strong> Amount of returns generated if your current rate of returns were extrapolated for an entire year.</p>
+			<p><div style="float:left;padding:12px 5px 0px 0px;font-size:11px;">Calculated as: =  </div> <div style="float:left;width:143px;"><img src="http://i.investopedia.com/simulator_ui/annual-return.gif" width="143" height="37" border="0" alt="Annual Return" /></div></p>
+			<div style="clear:both;"></div>
+			<p>Where:<br /> 
+			<strong>n</strong> = number of days since you opened your simulator account <br />
+			<strong>#</strong> = number of days in a year</p>
+		</div>
+	</div>
+</div>		</div>
+			<div class="home_inner_cont2">
+	<div class="home_bar">
+		<div id="divCaption" class="home_port_smry">My Home</div>
+		<div class="home_current_game">
+					</div>
+	</div>
+
+	<div class="home_row1">
+		<div class="home_smry_cont">
+			<div id="divUserExists" style="background-color:#eeeeee;overflow:hidden;padding:10px;">
+
+	<!-- START Avatar -->
+	<div style="float:left; width:95px;"><img src="http://i.investopedia.com/simulator_ui/inv-logo-avatar.jpg" id="imgAvatar" alt="Simulator Investor Pic" style="border:1px solid #003899;"></div>
+	<!-- END Avatar -->
+
+	<!-- START Profile Info -->
+	<div style="float:left; width:160px;padding-left:5px;">
+		<span id="divProfileName" style="font-size:20px;color:#003899;">sron</span>
+		<span id="spSince" style="width:160px;float:left;padding-top:5px;"><strong>Member Since: </strong>2008</span><br>
+		<span id="spExperience" style="width:160px;float:left;"><strong>Experience: </strong></span><br>
+		<span id="spInvStyle" style="width:160px;float:left;"><strong>Primary Investing Style(s): </strong></span><br>
+		<span id="spTimeHorizon" style="width:160px;float:left;"><strong>Time Horizon: </strong></span><br>
+	</div>
+	<!-- END Profile Info -->
+
+	<div style="clear:both;"></div>
+
+	<!-- START Profile text -->
+	<div style="margin-top:10px;"><strong>Investor Profile</strong></div>
+	<div id="divDesc"></div>
+	<div id="divEditProfile" style="text-align:right;">(<a href="http://www.investopedia.com/accounts/manageprofile.aspx">Edit Profile</a>)</div>
+	<!-- END Profile text -->
+
+	<div id="divUserNotExists" style="display:none;">The selected user does not exist.</div>
+
+</div>			<div id="AccountValuePnl">
+								<div class="home_smry" >
+					<div class="home_smry_inner">
+						<strong>Account Value:</strong> <span id="arrowAccount" class="down"><span id="lblAccountValue">$1,597,992,068.96</span></span>
+					</div>
+
+					<div class="home_280width">
+						<strong>Rank:</strong>
+						<span id="arrowRank" class="up"><span id="lblRank">1</span></span>
+						- (<a href="http://www.investopedia.com/simulator/ranking/">View Rankings</a>)
+					</div>
+				</div>
+							</div>
+						<div id="divRewards" class="home_your_games">
+				<div class="home_280width" style="padding-bottom:5px;"><strong>Your Awards</strong> - (<a href="http://www.investopedia.com/simulator/portfolio/awards.aspx?userId=1149777&amp;type=0">More Awards</a>)</div>
+				<div >
+<style type="text/css">
+	div.sc_menu {
+		/* Set it so we could calculate the offsetLeft */
+		position: relative;
+		height: 65px;
+		width: 250px;
+		overflow: auto;
+	}
+	ul.sc_menu {
+		display: block;
+		height: 50px;
+		/* max width here, for users without javascript */
+		width: 1500px;
+		padding: 15px 0 0 15px;
+		/* removing default styling */
+		margin: 0;
+		list-style: none;
+	}
+	.sc_menu li {
+		display: block;
+		float: left;
+		padding: 0 4px;
+	}
+	.sc_menu a {
+		display: block;
+		text-decoration: none;
+	}
+	.sc_menu span {
+		display: none;
+		margin-top: 3px;
+
+		text-align: center;
+		font-size: 12px;
+		color: #fff;
+	}
+	.sc_menu a:hover span {
+		display: block;
+	}
+	.sc_menu img {
+		border: 3px #fff solid;
+		-webkit-border-radius: 3px;
+		-moz-border-radius: 3px;
+	}
+	.sc_menu a:hover img {
+		filter:alpha(opacity=50);
+		opacity: 0.5;
+	}
+
+</style>
+
+<script type= "text/javascript">/*<![CDATA[*/
+	$(function(){
+		//Get our elements for faster access and set overlay width
+		var div = $('div.sc_menu'),
+			ul = $('ul.sc_menu'),
+			ulPadding = 15;
+
+		//Get menu width
+		var divWidth = div.width();
+
+		//Remove scrollbars	
+		div.css({overflow: 'hidden'});
+
+		//Find last image container
+		var lastLi = ul.find('li:last-child');
+
+		//When user move mouse over menu
+		div.mousemove(function(e){
+			//As images are loaded ul width increases,
+			//so we recalculate it each time
+			var ulWidth = lastLi[0].offsetLeft + lastLi.outerWidth() + ulPadding;
+			var left = (e.pageX - div.offset().left) * (ulWidth-divWidth) / divWidth;
+			div.scrollLeft(left);
+		});
+	});
+/*]]>*/</script>
+<div class="sc_menu">
+	<ul class="sc_menu">
+
+				<li><a id="lnkAwardItem" href="http://www.investopedia.com/simulator/portfolio/awards.aspx?userId=1149777&type=2" name="Watch list"><img src="http://i.investopedia.com/simulator_ui/awards/watch-list-icon.gif" alt="Watch list" title="Watch list" id="imgAward" style="border-style:none"/></a></li>
+			</ul>
+</div>
+
+</div>
+
+<div id="divNoAwardsMessage" style="display:none" >
+	 <a href="http://www.investopedia.com/simulator/portfolio/awards.aspx">Learn about awards</a>
+</div>
+				
+
+
+
+			</div>
+						<div id="divActions" class="home_your_games">
+				<a id="lnkSendPrivateMessage" href="http://www.investopedia.com/simulator/messages/messages.aspx?nickname=sron">Send Private Message</a><br />
+								<div id="divViewPortfolio" ><a id="lnkViewPortfolio"  href="http://www.investopedia.com/simulator/ranking/viewportfolio.aspx?UserID=1149777&GameID=1">View Portfolio</a><br /></div>
+																<div id="divViewCAHistory" ><a id="lnkViewCAHistory" href="http://www.investopedia.com/simulator/trade/corporateactionhistory.aspx?UserID=1149777&GameID=1">View Corporate Action History</a></div>
+							</div>
+			
+
+		</div>
+
+		<div style="width:472px;float:right;">
+						<div id="currencyFilter">
+
+				<div class="home_port_compare">
+	<div>
+		<div style="background-color:#eeeeee;padding:10px 0px 0px 10px;">
+			<strong> Your Portfolio vs </strong>
+			 - (<a id="lnkPortfolio" href="http://www.investopedia.com/simulator/portfolio/">View Portfolio</a>)
+		</div>
+	</div>
+	<div style="clear:both;"></div>
+	<div style="width:472px;background-color:#eee;">
+		<div style="width:452px;overflow:hidden;padding:10px;">
+			<div id="divChart" style="height: 225px;" >
+				<br/>
+				<br/>
+				<br/>
+				<center>
+					<i>Chart data is currently unavailable.</i>
+				</center>
+			</div>
+			<div style="padding-top: 10px">
+                <div>
+                </div>
+			</div>
+		</div>
+	</div>
+</div>				
+			</div>
+		</div>
+	</div>
+</div>			<div class="home_hdr"> <h1>Game: <i>Investopedia Competition (No End)</i> - Trade History</h1></div>
+	<div>
+		
+	</div>
+	<div>
+			</div>
+	<div>
+		<div class="q_page_cont">
+		<div id="loadingDiv"  style="display:none; text-align:center"><img alt="" src="http://i.investopedia.com/research/community/ajax-loader.gif" />&nbsp;Loading...</div>
+	<div id="divData" style="width:100%;overflow:hidden;"><div style="PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; PADDING-TOP: 5px"
+	 align="center">
+
+	
+
+		<table cellspacing="0" align="Center" rules="all" border="1" id="gvTradeHistory" style="border-color:#E1E1E1;border-width:1px;border-style:Solid;width:100%;border-collapse:collapse;">
+			<tbody><tr class="TableHeader" style="white-space:nowrap;">
+				<th scope="col">Date</th>
+				<th scope="col">Trade Type</th>
+				<th scope="col">Symbol</th>
+				<th scope="col">Quantity</th>
+				<th scope="col">Target Price</th>
+				<th scope="col">Price</th>
+				<th scope="col">Commission</th>
+				<th scope="col">Total Cash Value</th>
+				<th scope="col">Account Value</th>
+			</tr>
+						<tr>
+				<td>3/28/2014 10:54 AM</td>
+				<td>Stock: Buy at Market</td>
+				<td><a href="http://www.investopedia.com/markets/stocks/yelp/" target="_blank" >YELP</a></td>
+				<td>300000</td>
+				<td></td>
+				<td>$78.04</td>
+				<td>$19.99</td>
+				<td>$23,412,019.99</td>
+				<td>$1,621,199,978.95</td>
+			</tr>
+						<tr style="background-color:#EEEEEE;">
+				<td>1/21/2014 6:58 PM</td>
+				<td>Stock: Split Adjustment Buy</td>
+				<td><a href="http://www.investopedia.com/markets/stocks/ma/" target="_blank" >MA
+				dt</a></td>
+				<td>580000</td>
+				<td></td>
+				<td>$83.65</td>
+				<td></td>
+				<td></td>
+				<td>$1,603,803,968.95</td>
+			</tr>
+						<tr>
+				<td>1/21/2014 6:58 PM</td>
+				<td>Stock: Split Adjustment Sell</td>
+				<td><a href="http://www.investopedia.com/markets/stocks/ma/" target="_blank" >MA</a></td>
+				<td>58000</td>
+				<td></td>
+				<td>$836.47</td>
+				<td></td>
+				<td></td>
+				<td>$1,603,803,968.95</td>
+			</tr>
+						<tr style="background-color:#EEEEEE;">
+				<td>12/31/2013 4:03 PM</td>
+				<td>Stock: Sell at Market</td>
+				<td><a href="http://www.investopedia.com/markets/stocks/eog/" target="_blank" >EOG</a></td>
+				<td>100000</td>
+				<td></td>
+				<td>$167.30</td>
+				<td>$19.99</td>
+				<td>$16,729,980.01</td>
+				<td>$1,639,586,328.94</td>
+			</tr>
+						<tr>
+				<td>12/31/2013 4:03 PM</td>
+				<td>Stock: Buy at Market</td>
+				<td><a href="http://www.investopedia.com/markets/stocks/himx/" target="_blank" >HIMX</a></td>
+				<td>900000</td>
+				<td></td>
+				<td>$14.79</td>
+				<td>$19.99</td>
+				<td>$13,311,019.99</td>
+				<td>$1,639,586,348.93</td>
+			</tr>
+						<tr style="background-color:#EEEEEE;">
+				<td>12/31/2013 4:03 PM</td>
+				<td>Stock: Buy at Market</td>
+				<td><a href="http://www.investopedia.com/markets/stocks/himx/" target="_blank" >HIMX</a></td>
+				<td>900000</td>
+				<td></td>
+				<td>$14.79</td>
+				<td>$19.99</td>
+				<td>$13,311,019.99</td>
+				<td>$1,639,586,368.92</td>
+			</tr>
+						<tr>
+				<td>12/31/2013 4:00 PM</td>
+				<td>Stock: Sell at Market</td>
+				<td><a href="http://www.investopedia.com/markets/stocks/si/" target="_blank" >SI</a></td>
+				<td>30000</td>
+				<td></td>
+				<td>$138.44</td>
+				<td>$19.99</td>
+				<td>$4,153,180.01</td>
+				<td>$1,639,586,388.91</td>
+			</tr>
+						<tr style="background-color:#EEEEEE;">
+				<td>12/31/2013 4:00 PM</td>
+				<td>Stock: Sell at Market</td>
+				<td><a href="http://www.investopedia.com/markets/stocks/si/" target="_blank" >SI</a></td>
+				<td>100000</td>
+				<td></td>
+				<td>$138.44</td>
+				<td>$19.99</td>
+				<td>$13,843,980.01</td>
+				<td>$1,639,586,408.90</td>
+			</tr>
+						<tr>
+				<td>12/31/2013 4:00 PM</td>
+				<td>Stock: Buy at Market</td>
+				<td><a href="http://www.investopedia.com/markets/stocks/himx/" target="_blank" >HIMX</a></td>
+				<td>900000</td>
+				<td></td>
+				<td>$14.79</td>
+				<td>$19.99</td>
+				<td>$13,311,019.99</td>
+				<td>$1,639,586,428.89</td>
+			</tr>
+						<tr style="background-color:#EEEEEE;">
+				<td>12/31/2013 4:00 PM</td>
+				<td>Stock: Buy at Market</td>
+				<td><a href="http://www.investopedia.com/markets/stocks/himx/" target="_blank" >HIMX</a></td>
+				<td>900000</td>
+				<td></td>
+				<td>$14.79</td>
+				<td>$19.99</td>
+				<td>$13,311,019.99</td>
+				<td>$1,639,586,448.88</td>
+			</tr>
+						<tr>
+				<td>12/30/2013 3:03 PM</td>
+				<td>Stock: Buy at Market</td>
+				<td><a href="http://www.investopedia.com/markets/stocks/yelp/" target="_blank" >YELP</a></td>
+				<td>600000</td>
+				<td></td>
+				<td>$66.03</td>
+				<td>$19.99</td>
+				<td>$39,618,019.99</td>
+				<td>$1,633,826,230.87</td>
+			</tr>
+						<tr style="background-color:#EEEEEE;">
+				<td>12/30/2013 2:57 PM</td>
+				<td>Stock: Sell at Market</td>
+				<td><a href="http://www.investopedia.com/markets/stocks/fcx/" target="_blank" >FCX</a></td>
+				<td>900000</td>
+				<td></td>
+				<td>$37.83</td>
+				<td>$19.99</td>
+				<td>$34,046,980.01</td>
+				<td>$1,633,772,050.86</td>
+			</tr>
+						<tr>
+				<td>12/30/2013 2:57 PM</td>
+				<td>Stock: Sell at Market</td>
+				<td><a href="http://www.investopedia.com/markets/stocks/si/" target="_blank" >SI</a></td>
+				<td>50000</td>
+				<td></td>
+				<td>$138.20</td>
+				<td>$19.99</td>
+				<td>$6,909,830.01</td>
+				<td>$1,633,772,070.85</td>
+			</tr>
+						<tr style="background-color:#EEEEEE;">
+				<td>12/30/2013 11:21 AM</td>
+				<td>Stock: Buy at Market</td>
+				<td><a href="http://www.investopedia.com/markets/stocks/ma/" target="_blank" >MA</a></td>
+				<td>50000</td>
+				<td></td>
+				<td>$836.47</td>
+				<td>$19.99</td>
+				<td>$41,823,519.99</td>
+				<td>$1,632,918,418.84</td>
+			</tr>
+						<tr>
+				<td>12/30/2013 11:21 AM</td>
+				<td>Stock: Buy at Market</td>
+				<td><a href="http://www.investopedia.com/markets/stocks/ma/" target="_blank" >MA</a></td>
+				<td>8000</td>
+				<td></td>
+				<td>$836.47</td>
+				<td>$19.99</td>
+				<td>$6,691,779.99</td>
+				<td>$1,632,918,438.83</td>
+			</tr>
+						<tr style="background-color:#EEEEEE;">
+				<td>12/30/2013 11:15 AM</td>
+				<td>Stock: Sell at Market</td>
+				<td><a href="http://www.investopedia.com/markets/stocks/f/" target="_blank" >F</a></td>
+				<td>600000</td>
+				<td></td>
+				<td>$15.35</td>
+				<td>$19.99</td>
+				<td>$9,209,980.01</td>
+				<td>$1,632,970,038.82</td>
+			</tr>
+						<tr>
+				<td>12/30/2013 11:15 AM</td>
+				<td>Stock: Sell at Market</td>
+				<td><a href="http://www.investopedia.com/markets/stocks/f/" target="_blank" >F</a></td>
+				<td>900000</td>
+				<td></td>
+				<td>$15.35</td>
+				<td>$19.99</td>
+				<td>$13,814,980.01</td>
+				<td>$1,632,970,058.81</td>
+			</tr>
+						<tr style="background-color:#EEEEEE;">
+				<td>12/30/2013 11:15 AM</td>
+				<td>Stock: Sell at Market</td>
+				<td><a href="http://www.investopedia.com/markets/stocks/fcx/" target="_blank" >FCX</a></td>
+				<td>200000</td>
+				<td></td>
+				<td>$37.52</td>
+				<td>$19.99</td>
+				<td>$7,503,980.01</td>
+				<td>$1,632,970,078.80</td>
+			</tr>
+						<tr>
+				<td>12/30/2013 11:12 AM</td>
+				<td>Stock: Sell at Market</td>
+				<td><a href="http://www.investopedia.com/markets/stocks/fcx/" target="_blank" >FCX</a></td>
+				<td>900000</td>
+				<td></td>
+				<td>$37.52</td>
+				<td>$19.99</td>
+				<td>$33,767,980.01</td>
+				<td>$1,632,970,098.79</td>
+			</tr>
+						<tr style="background-color:#EEEEEE;">
+				<td>12/30/2013 10:48 AM</td>
+				<td>Stock: Buy at Market</td>
+				<td><a href="http://www.investopedia.com/markets/stocks/eog/" target="_blank" >EOG</a></td>
+				<td>100000</td>
+				<td></td>
+				<td>$167.92</td>
+				<td>$19.99</td>
+				<td>$16,791,519.99</td>
+				<td>$1,631,876,768.78</td>
+			</tr>
+						<tr>
+				<td>12/30/2013 10:39 AM</td>
+				<td>Stock: Buy at Market</td>
+				<td><a href="http://www.investopedia.com/markets/stocks/himx/" target="_blank" >HIMX</a></td>
+				<td>300000</td>
+				<td></td>
+				<td>$13.48</td>
+				<td>$19.99</td>
+				<td>$4,044,019.99</td>
+				<td>$1,634,683,948.77</td>
+			</tr>
+						<tr style="background-color:#EEEEEE;">
+				<td>12/30/2013 10:24 AM</td>
+				<td>Stock: Buy at Market</td>
+				<td><a href="http://www.investopedia.com/markets/stocks/twtr/" target="_blank" >TWTR</a></td>
+				<td>500000</td>
+				<td></td>
+				<td>$60.30</td>
+				<td>$19.99</td>
+				<td>$30,150,019.99</td>
+				<td>$1,635,795,748.76</td>
+			</tr>
+						<tr>
+				<td>4/5/2012 9:58 AM</td>
+				<td>Stock: Buy at Market Open</td>
+				<td><a href="http://www.investopedia.com/markets/stocks/gs/" target="_blank" >GS</a></td>
+				<td>100000</td>
+				<td></td>
+				<td>$119.45</td>
+				<td>$19.99</td>
+				<td>$11,945,019.99</td>
+				<td>$1,463,688,098.75</td>
+			</tr>
+						<tr style="background-color:#EEEEEE;">
+				<td>3/29/2012 9:59 AM</td>
+				<td>Stock: Sell at Market Open</td>
+				<td><a href="http://www.investopedia.com/markets/stocks/aapl/" target="_blank" >AAPL</a></td>
+				<td>150000</td>
+				<td></td>
+				<td>$612.78</td>
+				<td>$19.99</td>
+				<td>$91,916,980.01</td>
+				<td>$1,453,208,518.74</td>
+			</tr>
+						<tr>
+				<td>11/28/2011 3:55 PM</td>
+				<td>Stock: Sell at Market Open</td>
+				<td><a href="http://www.investopedia.com/markets/stocks/nue/" target="_blank" >NUE</a></td>
+				<td>950000</td>
+				<td></td>
+				<td>$37.04</td>
+				<td>$19.99</td>
+				<td>$35,187,980.01</td>
+				<td>$1,266,270,368.73</td>
+			</tr>
+						</tbody></table>
+
+		
+		<div id="divPager" runat="server" style="padding:2px 5px 0px 0px; background-color:#eaebea;margin-top:1px;overflow:hidden;width:100%;">
+		<div style="float:right;">	<table cellpadding="3" cellspacing="1" border="0" class="PagerContainerTable">
+		<tbody>
+		<tr>
+			<!-- Previous page link -->
+							<td class="PagerCurrentPageCell"><strong> &lt; </strong></td>
+			
+			<!-- Numbered page links -->
+												<td class="PagerCurrentPageCell"><strong> 1 </strong></td>
+																<td class="PagerOtherPageCells"><a class="PagerHyperlinkStyle" href="http://www.investopedia.com/simulator/trade/tradeoverview.aspx?UserID=1149777&GameID=1&Currency=USD&page=2" title="Show Result Page 2"> 2 </a></td>
+																<td class="PagerOtherPageCells"><a class="PagerHyperlinkStyle" href="http://www.investopedia.com/simulator/trade/tradeoverview.aspx?UserID=1149777&GameID=1&Currency=USD&page=3" title="Show Result Page 3"> 3 </a></td>
+																<td class="PagerOtherPageCells"><a class="PagerHyperlinkStyle" href="http://www.investopedia.com/simulator/trade/tradeoverview.aspx?UserID=1149777&GameID=1&Currency=USD&page=4" title="Show Result Page 4"> 4 </a></td>
+																<td class="PagerOtherPageCells"><a class="PagerHyperlinkStyle" href="http://www.investopedia.com/simulator/trade/tradeoverview.aspx?UserID=1149777&GameID=1&Currency=USD&page=5" title="Show Result Page 5"> 5 </a></td>
+																<td class="PagerOtherPageCells"><a class="PagerHyperlinkStyle" href="http://www.investopedia.com/simulator/trade/tradeoverview.aspx?UserID=1149777&GameID=1&Currency=USD&page=6" title="Show Result Page 6"> 6 </a></td>
+																<td class="PagerOtherPageCells"><a class="PagerHyperlinkStyle" href="http://www.investopedia.com/simulator/trade/tradeoverview.aspx?UserID=1149777&GameID=1&Currency=USD&page=7" title="Show Result Page 7"> 7 </a></td>
+																<td class="PagerOtherPageCells"><a class="PagerHyperlinkStyle" href="http://www.investopedia.com/simulator/trade/tradeoverview.aspx?UserID=1149777&GameID=1&Currency=USD&page=8" title="Show Result Page 8"> 8 </a></td>
+																<td class="PagerOtherPageCells"><a class="PagerHyperlinkStyle" href="http://www.investopedia.com/simulator/trade/tradeoverview.aspx?UserID=1149777&GameID=1&Currency=USD&page=9" title="Show Result Page 9"> 9 </a></td>
+																<td class="PagerOtherPageCells"><a class="PagerHyperlinkStyle" href="http://www.investopedia.com/simulator/trade/tradeoverview.aspx?UserID=1149777&GameID=1&Currency=USD&page=10" title="Show Result Page 10"> 10 </a></td>
+							
+			<!-- Next page link -->
+							<td class="PagerOtherPageCells"><a class="PagerHyperlinkStyle" href="http://www.investopedia.com/simulator/trade/tradeoverview.aspx?UserID=1149777&GameID=1&Currency=USD&page=2" title=" Next to Page 2"> &gt; </a></td>
+			
+		</tr>
+		</tbody></table>
+</div>
+	</div>
+		<br/>
+	<div>
+		<span>Total Transactions:</span>
+		<span id="lblTotalTransactions">4918</span>
+	</div>
+</div></div>
+	<div>
+		&nbsp;</div>
+
+</div>	</div>
+</div></div>
+
+</div>
+
+</div>
+
+<div style="width:170px;float:right;background-color:#efefef;padding:10px 5px;margin-top:7px">
+
+    <div class="topics-right-white-container-sim">
+        <div class="topics-right-header-sim">
+            <div style="float:left;"><img src="http://i.investopedia.com/inv/topics/topics-market-place-icon.gif" width="16" height="16" alt="Marketplace Icon" border="0" style="padding-right:5px;"></div>
+            <div style="float:left;">Marketplace</div>
+        </div>
+        <div>
+            <iframe frameborder="0" scrolling="No" src="http://i.investopedia.com/inv/ads/html/IndustryBrains/165xFlexa.html" marginheight="0" marginwidth="0" width="159" height="112"></iframe>
+        </div>
+
+    </div>
+
+    <div class="topics-right-sky-container-sim">
+        <div id='AdSlot_AF-Right-Skyscraper'>
+  <script type="text/javascript">
+    googletag.cmd.push(function() { googletag.display('AdSlot_AF-Right-Skyscraper'); });
+  </script>
+</div>    </div>
+
+    <div class="topics-right-white-container-sim">
+        <div class="topics-right-header-sim">
+            <div style="float:left;"><img src="http://i.investopedia.com/inv/topics/topics-trading-center-icon.gif" width="16" height="16" alt="Treading Center Icon" border="0" style="padding-right:5px;"></div>
+            <div style="float:left;">Trading Center</div>
+        </div>
+        <div align="center" style="padding-top:5px;">
+            <span id="ctl00_cgiAdBFRightButton1">
+                <div id='AdSlot_BF-Right-Button1'>
+  <script type="text/javascript">
+    googletag.cmd.push(function() { googletag.display('AdSlot_BF-Right-Button1'); });
+  </script>
+</div>            </span>
+            <span id="ctl00_cgiAdBFRightButton2">
+                <div id='AdSlot_BF-Right-Button2'>
+  <script type="text/javascript">
+    googletag.cmd.push(function() { googletag.display('AdSlot_BF-Right-Button2'); });
+  </script>
+</div>            </span>
+        </div>
+    </div>
+
+    <div class="topics-right-white-container-sim">
+        <div class="topics-right-header-sim">
+            <div style="float:left;"><img src="http://i.investopedia.com/inv/topics/topics-special-offers-icon.gif" width="16" height="16" alt="Free Tools Icon" border="0" style="padding-right:5px;"></div>
+            <div style="float:left;">Free Tools</div>
+        </div>
+        <div style="padding:5px;">
+            <a class="ib_titlelink_sideunit" href="http://www.theadauthority.com/advertisers/mercer/cme_hou/index.asp?TAA_ID=36_1019_3_4_1"><strong>Free Booklet on Hedging Your Real Estate</strong></a>
+            <a class="ib_titlelink_sideunit" href="http://www.theadauthority.com/advertisers/vision/guide/index.asp?TAA_ID=32_1019_3"><strong>Free Options Trading Manual</strong></a>
+        </div>
+
+    </div>
+
+    <div class="topics-right-white-container-sim" style="margin-bottom:0px;">
+        <div class="topics-right-header-sim">
+            <div style="float:left;"><img src="http://i.investopedia.com/inv/topics/spons-links-icon.gif" width="16" height="16" alt="Sponsored Links Icon" border="0" style="padding-right:5px;"></div>
+            <div style="float:left;">Sponsored Links</div>
+        </div>
+        <div style="padding:5px;">
+            <a class="ib_titlelink_sideunit" href="http://www.theadauthority.com/advertisers/opvest/house-odds/odds.asp?TAA_ID=111_1019_88_5_1"><strong>Exclusive:  Learn the "House Odds" of Investing</strong></a>
+            <a class="ib_titlelink_sideunit" href="http://www.theadauthority.com/advertisers/ng/abc/index.asp?TAA_ID=24_1019_88_5_1"><strong>Pinpoint Entries & Exits on any market</strong></a>
+            <a class="ib_titlelink_sideunit" href="http://www.theadauthority.com/advertisers/traders-edge/booklet.asp?TAA_ID=76_1019_88_2_1"><strong>Free Booklet:  Smart Trading Techniques</strong></a>
+            <a class="ib_titlelink_sideunit" href="http://www.theadauthority.com/advertisers/daniels/spread-trading/bower-guide.asp?TAA_ID=63_1019_88_23_1"><strong>3 Basic Futures Spread Trading Strategies</strong></a>
+            <a class="ib_titlelink_sideunit" href="http://www.theadauthority.com/advertisers/rjo/options/index.asp?TAA_ID=21_1019_88_9_1"><strong>Options Protect Your Assets and Generate Income. Complimentary Intro Guide</strong></a>
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+    var REFRESH_RATE = 120000;
+    var objctl00_MyTicker = new Ticker('divTicker', 'ScrollTickerPos');
+    objctl00_MyTicker.pauseOnMouseOver = true;
+    var startScroll = true;
+    function updatectl00_MyTicker_tickerContent($)
+    {
+        $.ajax({
+            type: "GET",
+            url: 'http://www.investopedia.com/simulator/ajax/tickercontent.aspx?PageType=DEFAULT_',
+            success: function(msg){
+                if (allTickers != undefined && allTickers['divTicker'] != undefined)
+                {
+                    allTickers['divTicker'].content = msg;
+                    if(startScroll)
+                    {
+                        objctl00_MyTicker.start();
+                        startScroll = false;
+                    }
+                    setTimeout('updatectl00_MyTicker_tickerContent(jQuery)',REFRESH_RATE);
+                }
+            }
+        });
+    }
+    updatectl00_MyTicker_tickerContent(jQuery);
+
+//    setTimeout('updatectl00_MyTicker_tickerContent(jQuery)', REFRESH_RATE);
+//]]>
+</script>
+<!-- Jug Media Tag -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-M7SHNR"
+height="0" width="0"
+style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-M7SHNR');</script>
+<!-- End Jug Media Tag -->
+<div style="clear:both;"></div>
+<div style="height:0; font-size:0;border-top:solid 2px #cfcfcf; float: left; margin-left: 12px;width:988px"></div>
+<div style="width:996px; margin: 0 auto; padding: 5px 0 15px 0; clear: both ">
+    <div style="border-top:none; width:975px; margin: 0 auto;">
+        <!-- Footer -->
+        <div style="width:975px;">
+            <div align="center" style="padding-top:5px; background-color: #FFFFFF;text-align:center; font-size:12px;">
+                <a href="http://www.investopedia.com/simulator/">My Profile </a>| <a href="http://www.investopedia.com/simulator/portfolio/">Portfolio</a> | <a href="http://www.investopedia.com/simulator/trade/tradestock.aspx">
+                    Trading</a> | <a href="http://www.investopedia.com/simulator/ranking/">Ranking</a> | <a href="http://www.investopedia.com/simulator/game/">Games</a>
+                | <a href="http://www.investopedia.com/university/simulator/" target="_blank">
+                    Help</a> | <a href="http://www.investopedia.com/simulator/markets/">Resources</a> |
+                <a href="http://www.investopedia.com/simulator/help/contact.aspx">Contact</a> | <a href=http://www.investopedia.com/articles/pf/">Financial Edge</a>
+            </div>
+            <div style="text-align:center; padding:5px 0px;">
+                             Copyright &copy; 2014, Investopedia US, A Division of IAC. <br /><a href="http://www.investopedia.com/corp/copyright.aspx">
+                    All Rights Reserved</a> | <a href="http://www.investopedia.com/corp/privacypolicy.aspx">Privacy
+                    Policy</a> | <a href="http://www.investopedia.com/corp/termsofuse.aspx">Terms of Use</a>
+                | <a href="http://www.investopedia.com/corp/contactus.aspx?type=LicenseDictionary">Dictionary Licensing</a>
+                | <a href="http://www.investopedia.com/corp/advertise.aspx">Advertise on Investopedia</a>
+                | <a href="http://www.investopedia.com/corp/about.aspx">About Us</a>
+            </div>
+            <div style="text-align:center;"><a href="http://feeds.investopedia.com/stockinvesting">Stock News In Your Inbox</a> | <a href="http://www.investopedia.com/rss/">RSS</a>
+            </div>
+
+<span class="rssicon">
+    <span id="ctl00_Footer1_lblCName" style="color:#EEEEEE;font-size:5pt;"></span>
+</span>
+
+            <!-- END Footer -->
+        </div>
+    </div>
+	<div style="clear: both"></div>
+    <div style="font:normal 9px arial; color:#eeeeee;"></div>
+
+    </div>
+ <script>
+					 function insertStyle(name)
+					 {
+						        //var names = new Array();
+		            		//names[0] = 'google_ads_iframe_/8397/INV-NA/Investing/Investing/IC-Textlink2/Simulator_0';
+		            		//names[1] = 'google_ads_iframe_/8397/INV-NA/Investing/Investing/IC-Textlink1/Simulator_0';
+		            		var iframe = null;		
+		            		//for(var i = 0; i < names.length; i++)
+		            		//{
+		                		//name = names[i];
+		                		iframe = top.frames[name].document;
+		                		
+		                		if(!iframe)
+		                		{
+		                			  setTimeout(function(){insertStyle(name)}, 700);	  	
+			                			return;
+		                		}
+		                		var otherhead = iframe.getElementsByTagName("head")[0];
+		                	if(otherhead.getElementsByTagName('style') &&　otherhead.getElementsByTagName('style').length > 0)
+		                	{return;}
+								            
+			           			  var css = 
+			           			          ' a{display:inline-block !important;text-align:center !important;font-family: Arial, Helvetica, sans-serif;font-size:12px}  '
+			       			         		+ 'a:link{color:#003899;}a:visited{color:#003899;}a:hover{color:#94000b;} a:visited:hover {color:#94000b;} a:active{color:#94000b;}'
+			           			          ;
+			          					var  style = document.createElement('style');
+			          					style.type = 'text/css';
+			          					if (style.styleSheet){
+			            			  	style.styleSheet.cssText = css;
+			            				} else {
+			            			 	 style.appendChild(document.createTextNode(css));
+			            				}
+			          					otherhead.appendChild(style);
+			          					
+			          					var spanID = 'ctl00_cgiAdTextLink1';
+			          					if(name == 'google_ads_iframe_/8397/INV-NA/Investing/Investing/IC-Textlink2/Simulator_0')
+			          					{
+			          						spanID = 'ctl00_cgiAdTextLink2';
+				          					}
+			          					
+			          					jQuery('#' + spanID).show();
+		               // }
+	          }
+				jQuery('iframe').load( function() {
+ 					var name = jQuery(this).attr('name');
+            		//alert(name);
+        			//insertStyle();
+        			  
+        			  if(name == 'google_ads_iframe_/8397/INV-NA/Investing/Investing/IC-Textlink2/Simulator_0'
+            			  || name == 'google_ads_iframe_/8397/INV-NA/Investing/Investing/IC-Textlink1/Simulator_0' )
+        			  {
+        				  insertStyle(name);
+            		}
+            			    
+        		});
+        		</script>
+</body>
+</html>

@@ -4,14 +4,14 @@
 
     <insert id="createAccount" parameterType="PositionKeeperDataWarehouse.Entity.Account">
         INSERT INTO Account
-        VALUES (#{accountName},#{memberSince},#{experience},#{primaryInvestingStyle},#{timeHorizon}, #{userId})
+        VALUES (#{accountKey},#{accountName},#{memberSince},#{experience},#{primaryInvestingStyle},#{timeHorizon})
     </insert>  
     
     <insert id="createAccounts" parameterType="PositionKeeperDataWarehouse.Entity.Account">
         INSERT INTO Account
         VALUES
         <foreach collection="list" item="account" index="index" separator="," >   
-        (#{account.accountName},#{account.memberSince},#{account.experience},#{account.primaryInvestingStyle},#{account.timeHorizon}, #{account.userId})
+        (#{account.accountKey},#{account.accountName},#{account.memberSince},#{account.experience},#{account.primaryInvestingStyle},#{account.timeHorizon})
         </foreach>
     </insert>  
     
@@ -22,19 +22,15 @@
     		Experience = #{experience},
     		PrimaryInvestingStyle = #{primaryInvestingStyle},
     		TimeHorizon = #{timeHorizon} 
-    	WHERE UserId = #{userId}
+    	WHERE AccountKey = #{accountKey}
     </update>    
     
     <select id="getAllAccounts" resultMap="account">
     	SELECT * FROM Account
     </select>  
      
-    <select id="getAccountByUserId" resultType="PositionKeeperDataWarehouse.Entity.Account">
-    	SELECT * FROM Account where UserId = #{userId}
-    </select> 
-    
-    <select id="countAccountByUserId" resultType="int">
-    	SELECT count(*) FROM Account where AccountName = #{userId}
+    <select id="getAccountByAccountKey" resultType="PositionKeeperDataWarehouse.Entity.Account">
+    	SELECT * FROM Account where AccountKey = #{accountKey}
     </select> 
     
     <resultMap id="account" type="PositionKeeperDataWarehouse.Entity.Account">
@@ -44,6 +40,5 @@
 	    <result column="Experience" property="experience" />
 	    <result column="PrimaryInvestingStyle" property="primaryInvestingStyle" />
 	    <result column="TimeHorizon" property="timeHorizon" />
-   	    <result column="UserId" property="userId" />
     </resultMap>
 </mapper>

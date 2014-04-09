@@ -3,11 +3,11 @@
 <mapper namespace="PositionKeeperDataWarehouse.Dao.IGameDao">
     <insert id="createGame" parameterType="PositionKeeperDataWarehouse.Entity.Game">
         INSERT INTO Game
-        VALUES (#{gameName},#{currency},#{startDate},#{endDate},#{gameId})
+        VALUES (#{gameKey},#{gameName},#{currency},#{startDate},#{endDate})
     </insert>   
-    <insert id="deleteAllGames">
+    <delete id="deleteAllGames">
     	DELETE FROM Game
-    </insert>   
+    </delete>   
     <resultMap id="game" type="PositionKeeperDataWarehouse.Entity.Game">
 	    <id column="GameKey" property="gameKey" />
 	    <result column="GameName" property="gameName" />
