@@ -1,5 +1,6 @@
 package PositionKeeperDataWarehouse.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import PositionKeeperDataWarehouse.Dao.IAccountDao;
@@ -7,6 +8,7 @@ import PositionKeeperDataWarehouse.Dao.IGameStatusSnapshotDao;
 import PositionKeeperDataWarehouse.Dao.IProductDao;
 import PositionKeeperDataWarehouse.Entity.Account;
 import PositionKeeperDataWarehouse.Entity.Game;
+import PositionKeeperDataWarehouse.Entity.GameStatusSnapshot;
 import PositionKeeperDataWarehouse.Entity.TempGameStatusSnapshot;
 import PositionKeeperDataWarehouse.Helper.HttpHelper;
 import PositionKeeperDataWarehouse.Service.HttpThread.PositionPageThread;
@@ -24,7 +26,7 @@ public class PositionDetailService implements IPositionDetailService {
 			throws Exception {
 		for(Game game: gameList){
 			List<TempGameStatusSnapshot> tempGameStatusSnapshotList = getGameStatusSnapshotDao().getTempGameStatusSnapshotByGameKey(game.getGameKey());
-			
+			List<GameStatusSnapshot> gameStatusSnapshotList = new ArrayList<GameStatusSnapshot>();
 			//Get position detail
 			int threadCount = 20;
 			PositionPageThread[] threadList = new PositionPageThread[threadCount+1];
@@ -52,6 +54,26 @@ public class PositionDetailService implements IPositionDetailService {
 					getAccountDao().updateAccount(account);
 				}
 			}
+			
+			for(int i=0;i<threadList.length;i++){
+				gameStatusSnapshotList.addAll(threadList[i].getGameStatusSnapshotList());
+			}
+			
+			createGameStatusSnapshot(gameStatusSnapshotList);
+		}
+	}
+	
+	public void createGameStatusSnapshot(List<GameStatusSnapshot> gameStatusSnapshotList){
+		List<GameStatusSnapshot> newGameStatusSnapshotList = new ArrayList<GameStatusSnapshot>();
+		for(GameStatusSnapshot gameStatusSnapshot : gameStatusSnapshotList){
+			newGameStatusSnapshotList.add(gameStatusSnapshot);
+			if(newGameStatusSnapshotList.size()>80){
+				gameStatusSnapshotDao.createGameStatusSnapshots(newGameStatusSnapshotList);
+				newGameStatusSnapshotList.clear();
+			}
+		}
+		if(newGameStatusSnapshotList.size()>0){
+			gameStatusSnapshotDao.createGameStatusSnapshots(newGameStatusSnapshotList);
 		}
 	}
 

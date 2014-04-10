@@ -28,6 +28,6 @@
     <resultMap id="tempGameStatusSnapshot" type="PositionKeeperDataWarehouse.Entity.TempGameStatusSnapshot">
 	    <id column="AccountKey" property="accountKey" />
 	    <id column="GameKey" property="gameKey" />
-	     <id column="Profit" property="profit" />
+	    <id column="Profit" property="profit" />
     </resultMap>
 </mapper>

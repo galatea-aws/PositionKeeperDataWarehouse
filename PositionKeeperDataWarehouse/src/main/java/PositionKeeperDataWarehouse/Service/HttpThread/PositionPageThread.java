@@ -8,6 +8,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 
 import PositionKeeperDataWarehouse.Dao.IAccountDao;
 import PositionKeeperDataWarehouse.Entity.Account;
@@ -60,24 +61,22 @@ public class PositionPageThread extends Thread {
 		Account account = accountDao.getAccountByAccountKey(accountKey);
 		Document doc = Jsoup.parse(html);
 		// Member Since
-		String memberSince = doc.select("span[id=spSince]").first().ownText()
-				.trim();
-		account.setMemberSince(memberSince);
+		Element memberSince = doc.select("span[id=spSince]").first();
+		if(memberSince == null)
+			return;
+		account.setMemberSince(memberSince.ownText().trim());
 
 		// Experience
-		String experience = doc.select("span[id=spExperience]").first()
-				.ownText().trim();
-		account.setExperience(experience);
+		Element experience = doc.select("span[id=spExperience]").first();
+		account.setExperience(experience.ownText().trim());
 
 		// PrimaryInvestingStyle
-		String primaryInvestingStyle = doc.select("span[id=spInvStyle]")
-				.first().ownText().trim();
-		account.setPrimaryInvestingStyle(primaryInvestingStyle);
+		Element primaryInvestingStyle = doc.select("span[id=spInvStyle]").first();
+		account.setPrimaryInvestingStyle(primaryInvestingStyle.ownText().trim());
 
 		// TimeHorizon
-		String timeHorizon = doc.select("span[id=spTimeHorizon]").first()
-				.ownText().trim();
-		account.setTimeHorizon(timeHorizon);
+		Element timeHorizon = doc.select("span[id=spTimeHorizon]").first();
+		account.setTimeHorizon(timeHorizon.ownText().trim());
 		accountList.add(account);
 	}
 	
@@ -89,17 +88,34 @@ public class PositionPageThread extends Thread {
 		//DataLoadLogKey
 		gameStatusSnapshot.setDataLoadLogKey(game.getLatestDataLoadLog().getDataLoadLogKey());
 		//Rank
-		String rank = doc.select("span[id=arrowRank]").first().text();
-		gameStatusSnapshot.setRank(Integer.valueOf(rank));
+		Element rank = doc.select("span[id=arrowRank]").first();
+		if(rank==null)
+			return;
+		gameStatusSnapshot.setRank(Integer.valueOf(rank.text()));
 		//AccountValue
-		String accountValue = doc.select("span[id=arrowAccount]").first().text();
-		gameStatusSnapshot.setAccountValue(new BigDecimal(accountValue));
+		Element accountValue = doc.select("span[id=arrowAccount]").first();
+		if(accountValue!=null){
+			gameStatusSnapshot.setAccountValue(new BigDecimal(accountValue.text().replaceAll(",|\\$|\\s", "")));
+		}
+		else{
+			gameStatusSnapshot.setAccountValue(new BigDecimal(-999999));
+		}
 		//BuyingPower
-		String buyingPower = doc.select("ctl00_MainPlaceHolder_currencyFilter_ctrlPortfolioDetails_PortfolioSummary_lblBuyingPower").first().text();
-		gameStatusSnapshot.setBuyingPower(new BigDecimal(buyingPower));
+		Element buyingPower = doc.select("span[id=ctl00_MainPlaceHolder_currencyFilter_ctrlPortfolioDetails_PortfolioSummary_lblBuyingPower]").first();
+		if(buyingPower!=null){
+			gameStatusSnapshot.setBuyingPower(new BigDecimal(buyingPower.text().replaceAll(",|\\$|\\s", "")));
+		}
+		else{
+			gameStatusSnapshot.setBuyingPower(new BigDecimal(-999999));
+		}
 		//Cash
-		String cash = doc.select("ctl00_MainPlaceHolder_currencyFilter_ctrlPortfolioDetails_PortfolioSummary_lblCash").first().text();
-		gameStatusSnapshot.setCash(new BigDecimal(cash));
+		Element cash = doc.select("span[id=ctl00_MainPlaceHolder_currencyFilter_ctrlPortfolioDetails_PortfolioSummary_lblCash]").first();
+		if(cash!=null){
+			gameStatusSnapshot.setCash(new BigDecimal(cash.text().replaceAll(",|\\$|\\s", "")));
+		}
+		else{
+			gameStatusSnapshot.setCash(new BigDecimal(-999999));
+		}
 		//Profit
 		gameStatusSnapshot.setProfit(tempGameStatusSnapshot.getProfit());
 		
