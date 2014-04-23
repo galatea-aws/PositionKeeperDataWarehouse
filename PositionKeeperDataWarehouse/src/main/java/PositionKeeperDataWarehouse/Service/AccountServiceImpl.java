@@ -20,6 +20,7 @@ import PositionKeeperDataWarehouse.Entity.Game;
 import PositionKeeperDataWarehouse.Entity.TempGameStatusSnapshot;
 import PositionKeeperDataWarehouse.Helper.HtmlHelper;
 import PositionKeeperDataWarehouse.Helper.HttpHelper;
+import PositionKeeperDataWarehouse.Helper.InsertHelper;
 import PositionKeeperDataWarehouse.Service.HttpThread.GameRankPageThread;
 import PositionKeeperDataWarehouse.Service.Interface.IAccountService;
 
@@ -30,58 +31,55 @@ public class AccountServiceImpl implements IAccountService {
 	private IGameStatusSnapshotDao gameStatusSnapshotDao;
 	private HttpHelper httpHelper;
 
-	public void updateAccount(List<Game> gameList) throws Exception {
+	public void checkAccountInfo(List<Game> gameList) throws Exception {
 		for (Game game : gameList) {
-			updateAccount(game);
+			List<Account> accountList = new ArrayList<Account>();
+			List<TempGameStatusSnapshot> tempGameStatusSnapshotList = new ArrayList<TempGameStatusSnapshot>();
+			//Get game rank page count
+			
+			String url = "http://www.investopedia.com/simulator/ranking/?RGID="
+					+ game.getGameKey();
+			String html = httpHelper.getHtml(url);
+			
+			int pageCount = HtmlHelper.getPageCount(html);
+			int threadCount = 10;
+			//Start 10 threads to get accounts info
+			GameRankPageThread[] threadList = new GameRankPageThread[threadCount+1];
+			int pagePerThread = pageCount/(threadCount);
+			for(int i=0;i<threadList.length;i++){
+				int startPage = 1 + pagePerThread *i;
+				int endPage = Math.min(startPage+pagePerThread-1,pageCount);
+				threadList[i] = new GameRankPageThread(httpHelper,game,startPage,endPage);
+			}
+			int modresult = pageCount%threadCount;
+			int startPage = pagePerThread*threadCount+1;
+			threadList[threadCount] = new GameRankPageThread(httpHelper,game,startPage,modresult+startPage);
+			
+			for(int i=0;i<threadList.length;i++){
+				threadList[i].start();
+			}
+			
+			for(int i=0;i<threadList.length;i++){
+				threadList[i].join();
+			}
+			
+			//Update accounts info
+			for(int i=0;i<threadList.length;i++){
+				accountList = threadList[i].getAccountList();
+				insertAccounts(accountList);
+			}
+			
+			//Update 
+			for(int i=0;i<threadList.length;i++){
+				tempGameStatusSnapshotList.addAll(threadList[i].getTempGameStatusSnapshotList());
+			}
+			
+			InsertHelper<TempGameStatusSnapshot> insertHelper = new InsertHelper<TempGameStatusSnapshot>();
+			insertHelper.insert(tempGameStatusSnapshotList, "createTempGameStatusSnapshots", gameStatusSnapshotDao, 200);
 		}
 	}
-
-	public void updateAccount(Game game) throws Exception {
-		
-		List<Account> accountList = new ArrayList<Account>();
-		List<TempGameStatusSnapshot> tempGameStatusSnapshotList = new ArrayList<TempGameStatusSnapshot>();
-		//Get game rank page count
-		
-		String url = "http://www.investopedia.com/simulator/ranking/?RGID="
-				+ game.getGameKey();
-		String html = httpHelper.getHtml(url);
-		
-		int pageCount = HtmlHelper.getPageCount(html);
-		int threadCount = 10;
-		//Start 10 threads to get accounts info
-		GameRankPageThread[] threadList = new GameRankPageThread[threadCount+1];
-		int pagePerThread = pageCount/(threadCount);
-		for(int i=0;i<threadList.length;i++){
-			int startPage = 1 + pagePerThread *i;
-			int endPage = Math.min(startPage+pagePerThread-1,pageCount);
-			threadList[i] = new GameRankPageThread(httpHelper,game,startPage,endPage);
-		}
-		int modresult = pageCount%threadCount;
-		int startPage = pagePerThread*threadCount+1;
-		threadList[threadCount] = new GameRankPageThread(httpHelper,game,startPage,modresult+startPage);
-		
-		for(int i=0;i<threadList.length;i++){
-			threadList[i].start();
-		}
-		
-		for(int i=0;i<threadList.length;i++){
-			threadList[i].join();
-		}
-		
-		//Update accounts info
-		for(int i=0;i<threadList.length;i++){
-			accountList = threadList[i].getAccountList();
-			createAccounts(accountList);
-		}
-		
-		//Update 
-		for(int i=0;i<threadList.length;i++){
-			tempGameStatusSnapshotList = threadList[i].getTempGameStatusSnapshotList();
-			createTempGameStatusSnapshot(tempGameStatusSnapshotList);
-		}
-	}
-
-	public void createAccounts(List<Account> accountList) {
+	
+	public void insertAccounts(List<Account> accountList) {
 		List<Account> newAccountList = new ArrayList<Account>();
 		List<TempGameStatusSnapshot> tempGameStatusSnapshotList = new ArrayList<TempGameStatusSnapshot>();
 		for (Account account : accountList) {
@@ -100,7 +98,7 @@ public class AccountServiceImpl implements IAccountService {
 			accountDao.createAccounts(newAccountList);		
 	}
 	
-	public void createTempGameStatusSnapshot(List<TempGameStatusSnapshot> tempGameStatusSnapshotList){
+	public void insertTempGameStatusSnapshot(List<TempGameStatusSnapshot> tempGameStatusSnapshotList){
 		List<TempGameStatusSnapshot> newTempGameStatusSnapshotList = new ArrayList<TempGameStatusSnapshot>();
 		for(TempGameStatusSnapshot tempGameStatusSnapshot : tempGameStatusSnapshotList){
 			newTempGameStatusSnapshotList.add(tempGameStatusSnapshot);
@@ -144,6 +142,10 @@ public class AccountServiceImpl implements IAccountService {
 
 	public void setGameStatusSnapshotDao(IGameStatusSnapshotDao gameStatusSnapshotDao) {
 		this.gameStatusSnapshotDao = gameStatusSnapshotDao;
+	}
+
+	public void updateAccount(Account account) {
+		accountDao.updateAccount(account);
 	}
 
 }

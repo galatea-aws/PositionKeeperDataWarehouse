@@ -20,13 +20,14 @@ import PositionKeeperDataWarehouse.Dao.IGameDao;
 import PositionKeeperDataWarehouse.Dao.IGameStatusSnapshotDao;
 import PositionKeeperDataWarehouse.Entity.Game;
 import PositionKeeperDataWarehouse.Helper.HttpHelper;
+import PositionKeeperDataWarehouse.Service.Interface.IDataLoadLogService;
 import PositionKeeperDataWarehouse.Service.Interface.IGameService;
 
 public class GameServiceImpl implements IGameService {
 	private IGameDao gameDao;
 	private HttpHelper httpHelper;
 	private IGameStatusSnapshotDao gameStatusSnapshotDao;
-	private IDataLoadLogDao dataLoadLogDao; 
+	private IDataLoadLogService dataLoadLogService; 
 	
 	public void updateGameInfo() throws Exception{
 		List<Game> gameList = gameDao.getAllGames();
@@ -34,10 +35,10 @@ public class GameServiceImpl implements IGameService {
 		if(gameList.size()>0)
 			return;
 		else
-			createGames();
+			insertGames();
 	}
 	
-	public void createGames() throws Exception {
+	public void insertGames() throws Exception {
 		ArrayList<Game> gameList = convertTableToGames();
 		int gameCount = 0;
 		for(Game game: gameList){
@@ -119,7 +120,7 @@ public class GameServiceImpl implements IGameService {
 	public List<Game> getAllGames() {
 		List<Game> gameList = gameDao.getAllGames();
 		for(Game game : gameList){
-			game.setLatestDataLoadLog(dataLoadLogDao.getLastestDataLoadLogByGameKey(game.getGameKey()));
+			game.setLatestDataLoadLog(dataLoadLogService.getLastestDataLoadLogByGameKey(game.getGameKey()));
 		}
 		return gameList;
 	}
@@ -148,12 +149,12 @@ public class GameServiceImpl implements IGameService {
 		this.gameStatusSnapshotDao = gameStatusSnapshotDao;
 	}
 
-	public IDataLoadLogDao getDataLoadLogDao() {
-		return dataLoadLogDao;
+	public IDataLoadLogService getDataLoadLogService() {
+		return dataLoadLogService;
 	}
 
-	public void setDataLoadLogDao(IDataLoadLogDao dataLoadLogDao) {
-		this.dataLoadLogDao = dataLoadLogDao;
+	public void setDataLoadLogService(IDataLoadLogService dataLoadLogService) {
+		this.dataLoadLogService = dataLoadLogService;
 	}
 
 }

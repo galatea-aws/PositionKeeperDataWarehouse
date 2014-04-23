@@ -32,7 +32,7 @@ public class GameServiceImplTest {
 	
 	public void testCreateGames() {
 		try {
-			gameService.createGames();
+			gameService.insertGames();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

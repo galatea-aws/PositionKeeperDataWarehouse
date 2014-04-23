@@ -9,5 +9,6 @@
         <mapper resource="GameStatusSnapshotDaoMapper.xml"/>
         <mapper resource="ProductDaoMapper.xml"/>
         <mapper resource="TradeHistoryDaoMapper.xml"/>
+        <mapper resource="PositionDetailDaoMapper.xml"/>
     </mappers>
 </configuration>

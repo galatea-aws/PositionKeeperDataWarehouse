@@ -23,6 +23,7 @@ import javax.net.ssl.HttpsURLConnection;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -35,6 +36,7 @@ import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
+import org.apache.http.params.CoreProtocolPNames;
 import org.apache.http.util.EntityUtils;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
@@ -53,8 +55,10 @@ public class HttpHelper {
 	public HttpHelper(){
 		try {
 			login();
+			System.out.println("Login Succeeded");
 		} catch (Exception e) {
 			e.printStackTrace();
+			System.out.println("Login Failed");
 		}
 	}
 	
@@ -64,17 +68,24 @@ public class HttpHelper {
 	 * @throws Exception
 	 */
 	private void login() throws Exception{
+		httpclient = HttpClients.custom().build();
 		String loginUrl = "http://www.investopedia.com/accounts/login.aspx?returnurl=http%3A%2F%2Fwww.investopedia.com%2Fsimulator%2Fhome.aspx";
-		Document doc = Jsoup.connect(loginUrl).get();
+		String html = getHtml(loginUrl);
+		Document doc = Jsoup.parse(html);
 		Map<String, String> requestParameters = getLoginFormParams(doc.html(),
-				"sun@galatea-associates.com", "sunwei2323");
+				"galatea.northeastern@gmail.com", "northeastern6");
 
 		BasicCookieStore cookieStore = new BasicCookieStore();
 		PoolingHttpClientConnectionManager cm = new PoolingHttpClientConnectionManager();
 	    cm.setMaxTotal(100);
 	    cm.setDefaultMaxPerRoute(40);
+	    RequestConfig config = RequestConfig.custom().setConnectionRequestTimeout(500000).setSocketTimeout(50000).build();
 		httpclient = HttpClients.custom()
-				.setDefaultCookieStore(cookieStore).setConnectionManager(cm).build();
+				.setDefaultCookieStore(cookieStore)
+				.setConnectionManager(cm)
+				.setUserAgent("Mozilla/4.0 (compatible; MSIE 5.0; Windows NT; DigExt")
+				.setDefaultRequestConfig(config)
+				.build();
 		RequestBuilder rb = RequestBuilder.post().setUri(new URI(loginUrl));
 		for (Entry<String, String> entry : requestParameters.entrySet()) {
 			rb = rb.addParameter(entry.getKey(), entry.getValue());

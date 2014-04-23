@@ -1,0 +1,14 @@
+﻿<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="PositionKeeperDataWarehouse"
+  DTS:DTSID="{5358B1F2-490B-4A00-9694-50B2B7D1ADB7}"
+  DTS:CreationName="OLEDB">
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:ConnectionString="Data Source=2000COMPUTER-25\GALATEA;User ID=TestUser3;Initial Catalog=PositionKeeperDateWarehouse;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;">
+      <DTS:Password
+        DTS:Name="Password"
+        Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAzbgE+I+yyECOEUzw7Azf8wAAAAACAAAAAAAQZgAAAAEAACAAAAAUNfc5FvZdHTTa4zwndSUaSZ5WltyS4yh5Btq7i65pugAAAAAOgAAAAAIAACAAAABOph58c2yp3KaIJfmesyP18BXVkc8bJl73+opCXAhy14AAAABvSR65U2MdH75jiNLS5Ye24AJ3Ayv5sLj/LqgaTj+EIAYzdQsWJBSs753wTnM+Z6mUR5mm3s+MrcHqrFKtJSSzQsxGL1tLCBffCwwd1IiVHRGVe3D1P7vG9zf8thzgZblf2lr9arf+QKZfENZuieAcYYh0rtg0Pe5fo5QkQ8+5fEAAAAAGEL5+LN/LdBmWhLWHkGv2v5vpAZfLkcX+S/lYKjC3vAGl7DdllNqiYp7/mPzgT7f8Z2yXmfj2pCF+nE8FNn+s</DTS:Password>
+    </DTS:ConnectionManager>
+  </DTS:ObjectData>
+</DTS:ConnectionManager>

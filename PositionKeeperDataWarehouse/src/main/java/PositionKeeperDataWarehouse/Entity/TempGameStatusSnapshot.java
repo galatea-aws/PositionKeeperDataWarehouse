@@ -25,4 +25,7 @@ public class TempGameStatusSnapshot {
 	public void setProfit(BigDecimal profit) {
 		this.profit = profit;
 	}
+	public String toString(){
+		return "Account: " + accountKey + " Game: " + gameKey;
+	}
 }

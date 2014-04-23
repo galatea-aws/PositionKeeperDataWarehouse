@@ -96,13 +96,7 @@ public class TradeHistoryServiceImplTest {
 		}
 	}
 	
-	public void testUpdateProduct(){
-		long start = System.currentTimeMillis();
-		tradeHistoryService.updateProduct("Yelp");
-		System.out.println(System.currentTimeMillis()-start);
-		tradeHistoryService.updateProduct("AAPL");
-		System.out.println(System.currentTimeMillis()-start);
-		tradeHistoryService.updateOption("M1417E23");
+	public void testUpdateProduct(){;
 	}
 	
 	public void testInsertTradeHistory(){
@@ -140,7 +134,9 @@ public class TradeHistoryServiceImplTest {
 	
 	@Test
 	public void testBigDecimal(){
-		BigDecimal a = new BigDecimal("13.44");
+		String p = "- $297.90(-5.25 %)";
+		String gainLoss = p.replaceAll(",|\\$|\\s|\\(.*\\)", "");
+		System.out.println(new BigDecimal(gainLoss));
 	}
 	
 	@Test

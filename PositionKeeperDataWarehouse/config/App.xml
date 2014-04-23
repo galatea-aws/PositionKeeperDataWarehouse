@@ -29,6 +29,9 @@
 		<property name="gameService" ref="gameService"></property>
 		<property name="dataLoadLogService" ref="dataLoadLogService"></property>
 		<property name="accountService" ref="accountService"></property>
+		<property name="tradeHistoryService" ref="tradeHistoryService"></property>
+		<property name="positionDetailService" ref="positionDetailService"></property>
+		<property name="httpHelper" ref="httpHelper"></property>
 	</bean>
 
 	<bean id="accountDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
@@ -51,7 +54,7 @@
 		<property name="httpHelper" ref="httpHelper"></property>
 		<property name="gameDao" ref="gameDao"></property>
 		<property name="gameStatusSnapshotDao" ref="gameStatusSnapshotDao"></property>
-		<property name="dataLoadLogDao" ref="dataLoadLogDao"></property>
+		<property name="dataLoadLogService" ref="dataLoadLogService"></property>
 	</bean>
 
 	<bean id="dataLoadLogDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
@@ -75,26 +78,39 @@
 		<property name="mapperInterface" value="PositionKeeperDataWarehouse.Dao.IProductDao"></property>
 		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
 	</bean>
-
+	
+	<bean id="productService"
+		class="PositionKeeperDataWarehouse.Service.ProductServiceImpl">
+		<property name="productDao" ref="productDao"></property>
+		<property name="httpHelper" ref="httpHelper"></property>
+	</bean>
 	<bean id="tradeHistoryDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
 		<property name="mapperInterface"
 			value="PositionKeeperDataWarehouse.Dao.ITradeHistoryDao"></property>
 		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
 	</bean>
-
+	
 	<bean id="tradeHistoryService"
 		class="PositionKeeperDataWarehouse.Service.TradeHistoryServiceImpl">
 		<property name="gameStatusSnapshotDao" ref="gameStatusSnapshotDao"></property>
 		<property name="httpHelper" ref="httpHelper"></property>
-		<property name="productDao" ref="productDao"></property>
+		<property name="productService" ref="productService"></property>
 		<property name="tradeHistoryDao" ref="tradeHistoryDao"></property>
+	</bean>
+	
+	<bean id="positionDetailDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface"
+			value="PositionKeeperDataWarehouse.Dao.IPositionDetailDao"></property>
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
 	</bean>
 	
 	<bean id="positionDetailService"
 		class="PositionKeeperDataWarehouse.Service.PositionDetailService">
 		<property name="gameStatusSnapshotDao" ref="gameStatusSnapshotDao"></property>
 		<property name="httpHelper" ref="httpHelper"></property>
-		<property name="productDao" ref="productDao"></property>
-		<property name="accountDao" ref="accountDao"></property>
+		<property name="productService" ref="productService"></property>
+		<property name="accountService" ref="accountService"></property>
+		<property name="positionDetailDao" ref="positionDetailDao"></property>
 	</bean>
+
 </beans>

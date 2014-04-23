@@ -1,22 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="PositionKeeperDataWarehouse.Dao.ITradeHistoryDao">
- 
-    <insert id="createTradeHistories" parameterType="PositionKeeperDataWarehouse.Entity.TradeHistory">
-        INSERT INTO TradeHistory
-        VALUES
-        <foreach collection="list" item="tradeHistory" index="index" separator="," >
-        (#{tradeHistory.accountKey},#{tradeHistory.dataLoadLogKey},#{tradeHistory.productKey},#{tradeHistory.tradeDate},#{tradeHistory.orderType},
-        #{tradeHistory.tradeType},#{tradeHistory.quantity},#{tradeHistory.price},#{tradeHistory.commission},#{tradeHistory.totalCashValue})
-        </foreach>
-    </insert>  
-  
-    
-    <select id="getLatestTradeHistoryByAccountGame" resultType="PositionKeeperDataWarehouse.Entity.TradeHistory"  parameterType="map">
-		select top 1 * from TradeHistory, DataLoadLog 
-		where DataLoadLog.GameKey = #{gameKey} 
-		and TradeHistory.DataLoadLogKey = DataLoadLog.DataLoadLogKey 
+
+	<insert id="createTradeHistories" parameterType="PositionKeeperDataWarehouse.Entity.TradeHistory">
+		INSERT INTO TradeHistory
+		VALUES
+		<foreach collection="list" item="tradeHistory" index="index"
+			separator=",">
+			(#{tradeHistory.accountKey},#{tradeHistory.dataLoadLogKey},#{tradeHistory.productKey},#{tradeHistory.tradeDate},#{tradeHistory.orderType},
+			#{tradeHistory.tradeType},#{tradeHistory.quantity},#{tradeHistory.price},#{tradeHistory.commission},#{tradeHistory.totalCashValue})
+		</foreach>
+	</insert>
+
+
+	<select id="getLatestTradeHistoryByAccountGame" resultType="PositionKeeperDataWarehouse.Entity.TradeHistory"
+		parameterType="map">
+		select top 1 * from TradeHistory, DataLoadLog
+		where DataLoadLog.GameKey = #{gameKey}
+		and TradeHistory.DataLoadLogKey = DataLoadLog.DataLoadLogKey
 		and TradeHistory.AccountKey = #{accountKey}
 		order by TradeDate Desc
-    </select>
+	</select>
 </mapper>

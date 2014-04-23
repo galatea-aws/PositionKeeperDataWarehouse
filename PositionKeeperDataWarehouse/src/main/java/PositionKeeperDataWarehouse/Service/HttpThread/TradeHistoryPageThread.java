@@ -29,24 +29,25 @@ import PositionKeeperDataWarehouse.Helper.HttpHelper;
 import PositionKeeperDataWarehouse.Helper.OptionParser;
 import PositionKeeperDataWarehouse.Helper.TransactionParser;
 import PositionKeeperDataWarehouse.Service.AccountServiceImpl;
+import PositionKeeperDataWarehouse.Service.Interface.ITradeHistoryService;
 
 public class TradeHistoryPageThread extends Thread {
 	public static Logger logger = LogManager.getLogger(TradeHistoryPageThread.class.getName());
 	private HttpHelper httpHelper;
-	private ITradeHistoryDao tradeHistoryDao;
+	private ITradeHistoryService tradeHistoryService;
 	private Game game;
 	private int start;
 	private int end;
 	private List<TempGameStatusSnapshot> tempGameStatusSnapshotList;
 	private List<String> symbolList = new ArrayList<String>();
 	private List<TradeHistory> tradeHistory = new ArrayList<TradeHistory>();
-	public TradeHistoryPageThread(HttpHelper httpHelper, Game game, int start, int end,List<TempGameStatusSnapshot> tempGameStatusSnapshotList,ITradeHistoryDao tradeHistoryDao) {
+	public TradeHistoryPageThread(HttpHelper httpHelper, Game game, int start, int end,List<TempGameStatusSnapshot> tempGameStatusSnapshotList,ITradeHistoryService tradeHistoryService) {
 		this.httpHelper = httpHelper;
 		this.game = game;
 		this.start = start;
 		this.end = end;
 		this.tempGameStatusSnapshotList = tempGameStatusSnapshotList;
-		this.tradeHistoryDao = tradeHistoryDao;
+		this.tradeHistoryService = tradeHistoryService;
 	}
 
 	@Override
@@ -57,7 +58,7 @@ public class TradeHistoryPageThread extends Thread {
 			Map<String, Integer> map = new HashMap<String, Integer>();
 			map.put("accountKey", accountKey);
 			map.put("gameKey", game.getGameKey());
-			TradeHistory latestHistory = tradeHistoryDao.getLatestTradeHistoryByAccountGame(map);
+			TradeHistory latestHistory = tradeHistoryService.getLatestTradeHistoryByAccountGame(map);
 			
 			String url = "http://www.investopedia.com/simulator/trade/tradeoverview.aspx?UserID=" + accountKey + "&GameID=" + game.getGameKey();
 			String html;
@@ -65,17 +66,19 @@ public class TradeHistoryPageThread extends Thread {
 				html = httpHelper.getHtml(url);
 				int pageCount = HtmlHelper.getPageCount(html);
 				for(int j=1;j<=pageCount;j++){
-					logger.info("Processing Game: " + game.getGameKey() + " User: "
+					logger.info("TradeHistory Game: " + game.getGameKey() + " User: "
 							+ accountKey + " Page:" + j);
 					String detailUrl = url + "&page=" + j;
 					String detailHtml = httpHelper.getHtml(detailUrl);
 					List<TradeHistory> tradeHistoryOnPage = convertToTradeHistories(detailHtml,accountKey);
 					
-					if(!needCheckNextPage(tradeHistoryOnPage,latestHistory)){
-						break;
+					if(needCheckNextPage(tradeHistoryOnPage,latestHistory)){
+						tradeHistory.addAll(tradeHistoryOnPage);
+						continue;
 					}
 					else{
 						getTradeHistory().addAll(getNewTradeHistories(tradeHistoryOnPage,latestHistory));
+						break;
 					}
 				}
 			} catch (Exception e) {
@@ -121,13 +124,12 @@ public class TradeHistoryPageThread extends Thread {
 			//Commission
 			String commission = detail.next().text();
 			if(!commission.equals(""))
-				commission = commission.replace(",", "").replaceAll(",|\\$|\\s","");
+				commission = commission.replaceAll(",|\\$|\\s","");
 			else 
 				commission = "-1";
 			tradeHistory.setCommission(new BigDecimal(commission));
 			//TotalCashValue
 			String totalCashValue = detail.next().text();
-			String oritotalCashValue = totalCashValue;
 			if(!totalCashValue.equals(""))
 				totalCashValue= totalCashValue.replaceAll(",|\\$|\\s","");
 			else
@@ -157,7 +159,7 @@ public class TradeHistoryPageThread extends Thread {
 		if(latestHistory==null)
 			return true;
 		for(TradeHistory tradeHistory : tradeHistoryOnPage){
-			if(tradeHistory.getTradeDate().before(latestHistory.getTradeDate()))
+			if(!tradeHistory.getTradeDate().after(latestHistory.getTradeDate()))
 				return false;
 		}
 		return true;

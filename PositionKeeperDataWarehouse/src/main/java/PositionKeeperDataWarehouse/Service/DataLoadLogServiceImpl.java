@@ -31,4 +31,12 @@ public class DataLoadLogServiceImpl implements IDataLoadLogService {
 	public void setDataLoadLogDao(IDataLoadLogDao dataLoadLogDao) {
 		this.dataLoadLogDao = dataLoadLogDao;
 	}
+
+	public DataLoadLog getLastestDataLoadLogByGameKey(int GameKey) {
+		return dataLoadLogDao.getLastestDataLoadLogByGameKey(GameKey);
+	}
+
+	public void deleteAllDataLoadLog() {
+		dataLoadLogDao.deleteAllDataLoadLog();
+	}
 }

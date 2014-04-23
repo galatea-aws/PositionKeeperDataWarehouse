@@ -10,7 +10,10 @@ public class OptionParser {
 	public static Option convertToOption(String symbol){
 		Option option = new Option();
 		option.setOption(true);
-		option.setDescription("");
+		option.setProductType("Option");
+		option.setFullName("");
+		option.setIndustry("");
+		option.setSector("");
 		String optionPattern = "([a-zA-Z]+)(\\d{2}?)(\\d{2}?)([a-zA-Z]+)(\\d+\\.\\d+|\\d+)";
 		String miniOptionPattern = "([a-zA-Z]+\\d)(\\d{2}?)(\\d{2}?)([a-zA-Z]+)(\\d+\\.\\d+|\\d+)";
 		Pattern pattern = Pattern.compile(optionPattern);

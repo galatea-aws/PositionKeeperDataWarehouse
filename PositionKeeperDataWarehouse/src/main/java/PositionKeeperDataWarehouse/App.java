@@ -9,9 +9,11 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import PositionKeeperDataWarehouse.Entity.DataLoadLog;
 import PositionKeeperDataWarehouse.Entity.Game;
+import PositionKeeperDataWarehouse.Helper.HttpHelper;
 import PositionKeeperDataWarehouse.Service.Interface.IAccountService;
 import PositionKeeperDataWarehouse.Service.Interface.IDataLoadLogService;
 import PositionKeeperDataWarehouse.Service.Interface.IGameService;
+import PositionKeeperDataWarehouse.Service.Interface.IPositionDetailService;
 import PositionKeeperDataWarehouse.Service.Interface.ITradeHistoryService;
 
 /**
@@ -25,6 +27,8 @@ public class App
 	private IAccountService accountService;
 	private IGameService gameService;
 	private ITradeHistoryService tradeHistoryService;
+	private IPositionDetailService positionDetailService;
+	private HttpHelper httpHelper;
 	
     public static void main( String[] args )
     {
@@ -35,6 +39,10 @@ public class App
     }
 
     public void run(){
+		if(!httpHelper.isLogin()){
+
+			return;
+		}
     	//Update game information
     	try {
 			gameService.updateGameInfo();
@@ -51,7 +59,21 @@ public class App
 		
 		//Update AccountInfo
 		try {
-			getAccountService().updateAccount(gameList);
+			getAccountService().checkAccountInfo(gameList);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		//Update PositionDetail
+		try {
+			positionDetailService.createPositionDetailSnapshot(gameList);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		//Update TradeHistory
+		try {
+			tradeHistoryService.updateTradeHistory(gameList);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -87,5 +109,21 @@ public class App
 
 	public void setTradeHistoryService(ITradeHistoryService tradeHistoryService) {
 		this.tradeHistoryService = tradeHistoryService;
+	}
+
+	public IPositionDetailService getPositionDetailService() {
+		return positionDetailService;
+	}
+
+	public void setPositionDetailService(IPositionDetailService positionDetailService) {
+		this.positionDetailService = positionDetailService;
+	}
+
+	public HttpHelper getHttpHelper() {
+		return httpHelper;
+	}
+
+	public void setHttpHelper(HttpHelper httpHelper) {
+		this.httpHelper = httpHelper;
 	}
 }

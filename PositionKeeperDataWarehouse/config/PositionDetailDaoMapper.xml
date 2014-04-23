@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="PositionKeeperDataWarehouse.Dao.IPositionDetailDao">
+    <insert id="createPositionDetailSnapshots" parameterType="PositionKeeperDataWarehouse.Entity.PositionDetail">
+        INSERT INTO PositionDetail
+        VALUES
+        <foreach collection="list" item="positionDetail" index="index" separator="," >   
+        (#{positionDetail.productKey},#{positionDetail.accountKey},#{positionDetail.dataLoadLogKey},#{positionDetail.quantity}
+        ,#{positionDetail.direction},#{positionDetail.purchasePrice},#{positionDetail.currentPrice},#{positionDetail.totalValue},#{positionDetail.gainLoss})
+        </foreach>
+    </insert>  
+</mapper>
