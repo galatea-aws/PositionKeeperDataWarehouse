@@ -6,7 +6,48 @@
         VALUES
         <foreach collection="list" item="positionDetail" index="index" separator="," >   
         (#{positionDetail.productKey},#{positionDetail.accountKey},#{positionDetail.dataLoadLogKey},#{positionDetail.quantity}
-        ,#{positionDetail.direction},#{positionDetail.purchasePrice},#{positionDetail.currentPrice},#{positionDetail.totalValue},#{positionDetail.gainLoss})
+        ,#{positionDetail.direction},#{positionDetail.purchasePrice},#{positionDetail.currentPrice},#{positionDetail.totalValue},#{positionDetail.gainLoss},#{positionDetail.quantityDelta})
         </foreach>
     </insert>  
+    
+    <update id="updatePositionDetailSnapshot" parameterType="PositionKeeperDataWarehouse.Entity.PositionDetail">
+		UPDATE [dbo].[PositionDetail]
+		   SET [ProductKey] = #{productKey}
+		      ,[AccountKey] = #{accountKey}
+		      ,[DataLoadLogKey] = #{dataLoadLogKey}
+		      ,[Quantity] = #{quantity}
+		      ,[Direction] = #{direction}
+		      ,[PurchasePrice] = #{purchasePrice}
+		      ,[CurrentPrice] = #{currentPrice}
+		      ,[TotalValue] = #{totalValue}
+		      ,[GainLoss] = #{gainLoss}
+		      ,[QuantityDelta] = #{quantityDelta}
+		 WHERE PositionDetailKey = #{positionDetailKey}
+    </update>   
+    
+    <select id="getAllPositionDetailSnapshot" resultMap="positionDetail">
+    	SELECT * FROM PositionDetail where DataLoadLogKey >80
+    </select>   
+    
+    <select id="getPositionDetailByDataLoadLogKey" parameterType = "int" resultMap="positionDetail">
+    	SELECT * FROM PositionDetail where DataLoadLogKey = #{dataLoadLogKey}
+    </select>  
+    
+    <select id="getPositionDetailByDataLoadLogKeyAccountKeyProductKey" parameterType = "map" resultType="PositionKeeperDataWarehouse.Entity.PositionDetail">
+    	SELECT * FROM PositionDetail where DataLoadLogKey = #{dataLoadLogKey} and AccountKey = #{accountKey} and ProductKey = #{productKey} and Direction = #{direction}
+    </select>  
+    
+    <resultMap id="positionDetail" type="PositionKeeperDataWarehouse.Entity.PositionDetail">
+	    <id column="PositionDetailKey" property="positionDetailKey" />
+	    <result column="ProductKey" property="productKey" />
+	    <result column="AccountKey" property="accountKey" />
+	    <result column="DataLoadLogKey" property="dataLoadLogKey" />
+	    <result column="Quantity" property="quantity" />
+	    <result column="Direction" property="direction" />
+   	    <result column="PurchasePrice" property="purchasePrice" />
+	    <result column="CurrentPrice" property="currentPrice" />
+	    <result column="TotalValue" property="totalValue" />
+	    <result column="GainLoss" property="gainLoss" />
+	    <result column="QuantityDelta" property="quantityDelta" />
+    </resultMap>
 </mapper>

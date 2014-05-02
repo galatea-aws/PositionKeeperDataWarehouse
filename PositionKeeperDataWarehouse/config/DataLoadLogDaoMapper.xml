@@ -14,4 +14,26 @@
 		WHERE GameKey = #{GameKey} and DataLoadLogKey = (Select max(DataLoadLogKey)
 		from DataLoadLog where GameKey = #{GameKey})
 	</select>
+	
+	<select id="getPreviousDataLoadLog" resultType="PositionKeeperDataWarehouse.Entity.DataLoadLog" 
+		parameterType="map">
+		SELECT top 1 * FROM DataLoadLog
+		WHERE GameKey = #{gameKey} and DataLoadLogKey &lt; #{dataLoadLogKey} and DataLoadLogKey in (select distinct DataLoadLogKey from PositionDetail) Order by SnapshotDate desc
+	</select>
+	
+	<select id="getDataLoadLogByKey" resultType="PositionKeeperDataWarehouse.Entity.DataLoadLog"
+		parameterType="int">
+		SELECT * FROM DataLoadLog
+		WHERE DataLoadLogKey = #{dataLoadLogKey}
+	</select>
+	
+	<select id="getAllDataLoadLog" resultMap="dataLoadLog">
+		SELECT * FROM DataLoadLog where DataLoadLogKey in (select distinct DataLoadLogKey from PositionDetail) and DataLoadLogKey > 80
+	</select>
+	
+    <resultMap id="dataLoadLog" type="PositionKeeperDataWarehouse.Entity.DataLoadLog">
+	    <id column="DataLoadLogKey" property="dataLoadLogKey" />
+	    <result column="GameKey" property="gameKey" />
+	    <result column="SnapshotDate" property="snapshotDate" />
+    </resultMap>
 </mapper>

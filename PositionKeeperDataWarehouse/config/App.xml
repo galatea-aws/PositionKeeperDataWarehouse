@@ -111,6 +111,7 @@
 		<property name="productService" ref="productService"></property>
 		<property name="accountService" ref="accountService"></property>
 		<property name="positionDetailDao" ref="positionDetailDao"></property>
+		<property name="dataLoadLogService" ref="dataLoadLogService"></property>
 	</bean>
 
 </beans>

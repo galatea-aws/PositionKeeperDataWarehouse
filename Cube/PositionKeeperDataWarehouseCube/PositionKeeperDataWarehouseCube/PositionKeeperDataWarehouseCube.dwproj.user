@@ -1,0 +1,49 @@
+<AnalysisServicesUserConfiguration xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0">
+  <Configurations>
+    <Configuration>
+      <Name>Development</Name>
+      <Options>
+        <UserIDs>
+          <ConfigurationSetting>
+            <Id>Position Keeper Source</Id>
+            <Name>Position Keeper Source</Name>
+            <Value xsi:type="xsd:string">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAzbgE+I+yyECOEUzw7Azf8wAAAAAuAAAAUABvAHMAaQB0AGkAbwBuACAASwBlAGUAcABlAHIAIABTAG8AdQByAGMAZQAAABBmAAAAAQAAIAAAAByoyr/qA48+Bla18nYTFQfsjzL18PBwaRt+vC4TA5gLAAAAAA6AAAAAAgAAIAAAAF63o6eUqEWOZ6rR3PTnPTauS5TNR8l+d5V7X++LL27XIAAAALDPybdIhwHcwwYeoIa9pMZA7v8HW1/z15HznY6i2omtQAAAAPDYgtWXbVRTykMwYUDAHEyRFDmlX1+oJSRiY+HC6BF7qNHrSvUwF1eNmUDUmGnlS9APlMYgM6ykshNHRtPU+kE=</Value>
+          </ConfigurationSetting>
+          <ConfigurationSetting>
+            <Id>PositionKeeperDataWarehouse</Id>
+            <Name>PositionKeeperDataWarehouse</Name>
+            <Value xsi:type="xsd:string">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAzbgE+I+yyECOEUzw7Azf8wAAAAA4AAAAUABvAHMAaQB0AGkAbwBuAEsAZQBlAHAAZQByAEQAYQB0AGEAVwBhAHIAZQBoAG8AdQBzAGUAAAAQZgAAAAEAACAAAAC5nsleOlQz0O+LHYyYvLf+7hv2Y2pmXo/n4n4Wnei4ZgAAAAAOgAAAAAIAACAAAADkgYXW4aOxfFhcNEHYg+MvUbyIW2UyW1mOowtI2Huy4CAAAAD2kqgLmBhcUPiRuB2SPoyRtYoNIu9P9W5Pd1sm671r/0AAAAAsal0eBpV9gGgri7xgmpVp0SxpnCYKCpjIvxPjZlcggv2MVSokYfzrfujP+Z0pm4dp5bytmrzXuwY8k6QKwWOf</Value>
+          </ConfigurationSetting>
+          <ConfigurationSetting>
+            <Id>GALATEA</Id>
+            <Name>GALATEA</Name>
+            <Value xsi:type="xsd:string">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAzbgE+I+yyECOEUzw7Azf8wAAAAAQAAAARwBBAEwAQQBUAEUAQQAAABBmAAAAAQAAIAAAAMBE27WwCS8Vw6nA1GrR3P6/oZdRAOEVV8R53EAJ0ZvhAAAAAA6AAAAAAgAAIAAAAI/cw4aXDed0c3exz05PvP44y6anfoC4kbR2LqVlu+zjIAAAAMS48SPsV+zknzeiYW7BMRmHc1J/RkLZhJOPttT6m4/aQAAAAN52UjuUGpBUkz5XsXjpDGwbO2sqHhgczL/vpyWA8v+M7MRhOpcCFUmTYr8DMspkdouakyh6hn9jbdazl3oYQw4=</Value>
+          </ConfigurationSetting>
+        </UserIDs>
+        <UserPasswords>
+          <ConfigurationSetting>
+            <Id>Position Keeper Source</Id>
+            <Name>Position Keeper Source</Name>
+            <Value xsi:type="xsd:string">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAzbgE+I+yyECOEUzw7Azf8wAAAAAuAAAAUABvAHMAaQB0AGkAbwBuACAASwBlAGUAcABlAHIAIABTAG8AdQByAGMAZQAAABBmAAAAAQAAIAAAAOP4k6blwx3QbPTWUl3+iqMMIuRxg/DXSMLdv7B7t03DAAAAAA6AAAAAAgAAIAAAAPFXJYtARvCzKazDEvTVorxM7J+GWRmUqNPIhqSljD9GIAAAAJSZC+VpHXakltC+Ztbg8Ior+7aOLOM2Tz/rbYqRbTOXQAAAAEloQnONlk9wD56/g7vp+OwDRUQJwm36mqE6y8oLISlDcifmBNNuWAW5qzNiaHw+CeciQ+nhehWSrkJj7KS07TA=</Value>
+          </ConfigurationSetting>
+          <ConfigurationSetting>
+            <Id>PositionKeeperDataWarehouse</Id>
+            <Name>PositionKeeperDataWarehouse</Name>
+            <Value xsi:type="xsd:string">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAzbgE+I+yyECOEUzw7Azf8wAAAAA4AAAAUABvAHMAaQB0AGkAbwBuAEsAZQBlAHAAZQByAEQAYQB0AGEAVwBhAHIAZQBoAG8AdQBzAGUAAAAQZgAAAAEAACAAAAAU8pbWtE9Tzb8/UTRA2o7Put77JxeGfLV2klnVHuF7JgAAAAAOgAAAAAIAACAAAAAiAX3jIXqYqce5ODrx90XCZYpwlfJpaoRvf5sVzL3cqyAAAABgcRPjEOBLUFR+1AMCLP5S3aMegbTKYOpLZxo6g3fGBkAAAABWb8dpNYCgyYn2SjOZTW2ZJx6TLGZydFs0hVaFmxb76cUGSsp5NqPXp27FD+5l5OHeC0rK/kNgScta5SQ9Inj/</Value>
+          </ConfigurationSetting>
+          <ConfigurationSetting>
+            <Id>GALATEA</Id>
+            <Name>GALATEA</Name>
+            <Value xsi:type="xsd:string">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAzbgE+I+yyECOEUzw7Azf8wAAAAAQAAAARwBBAEwAQQBUAEUAQQAAABBmAAAAAQAAIAAAAPhYr1vEpsHy2sP+vv16lWhduZ9Icuavf+x0IdUdWOdFAAAAAA6AAAAAAgAAIAAAAMkrWUjXuXwKxKDb97WiZvm6BeMMJWHxUPeUoFgoORfyIAAAAGYpa/r05ZNoLhYs7cAfqxoSYLGtnuiQtQMC1ZCCiVOPQAAAAASYhehVhL2lTgpMONFnVhDKrbqIY/BU0ve4LHd49gi9fsD72XYO+MXsWq3tJdoad5blOtXTzC6nDNTcHVl2VvI=</Value>
+          </ConfigurationSetting>
+        </UserPasswords>
+        <TargetServer>2000COMPUTER-25\GALATEA</TargetServer>
+        <TargetDatabase>PositionKeeperDataWarehouseCube</TargetDatabase>
+        <StartObject>
+          <ObjectId></ObjectId>
+          <ObjectType>Current</ObjectType>
+        </StartObject>
+      </Options>
+    </Configuration>
+  </Configurations>
+</AnalysisServicesUserConfiguration>

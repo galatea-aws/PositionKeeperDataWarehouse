@@ -15,6 +15,8 @@ public class PositionDetail {
 	private BigDecimal totalValue;
 	private BigDecimal gainLoss;
 	private String productSymbol;
+	private BigInteger quantityDelta;
+	
 	public int getPositionDetailKey() {
 		return positionDetailKey;
 	}
@@ -80,5 +82,24 @@ public class PositionDetail {
 	}
 	public void setCurrentPrice(double currentPrice) {
 		this.currentPrice = currentPrice;
+	}
+	public BigInteger getQuantityDelta() {
+		return quantityDelta;
+	}
+	public void setQuantityDelta(BigInteger quantityDelta) {
+		this.quantityDelta = quantityDelta;
+	}
+	public PositionDetail clone() {
+		PositionDetail positionDetail = new PositionDetail();
+		positionDetail.setAccountKey(accountKey);
+		positionDetail.setCurrentPrice(currentPrice);
+		positionDetail.setDataLoadLogKey(dataLoadLogKey);
+		positionDetail.setProductKey(productKey);
+		positionDetail.setDirection(direction);
+		positionDetail.setGainLoss(gainLoss);
+		positionDetail.setQuantity(quantity);
+		positionDetail.setTotalValue(totalValue);
+		positionDetail.setQuantityDelta(quantityDelta);
+		return positionDetail;
 	}
 }

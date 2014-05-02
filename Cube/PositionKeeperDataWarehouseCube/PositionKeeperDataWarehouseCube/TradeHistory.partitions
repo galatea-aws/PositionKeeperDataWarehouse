@@ -1,0 +1,45 @@
+﻿<Cube xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0" dwd:design-time-name="457f6bc7-d447-4e3f-af1f-b8ecf4c4e229" xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">
+  <ID>TradeHistory</ID>
+  <MeasureGroups>
+    <MeasureGroup>
+      <ID>Fact Trade History</ID>
+      <Partitions>
+        <Partition dwd:design-time-name="269dfba5-7272-48df-891f-3e9517f4db06">
+          <ID>Fact Trade History</ID>
+          <Name>Fact Trade History</Name>
+          <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+          <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+          <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
+          <State>Unprocessed</State>
+          <Source xsi:type="DsvTableBinding" dwd:design-time-name="57774840-7770-45ea-8d46-b2821396e88e">
+            <DataSourceViewID>Position Keeper Data Warehouse</DataSourceViewID>
+            <TableID>dbo_FactTradeHistory</TableID>
+          </Source>
+          <StorageMode>Molap</StorageMode>
+          <CurrentStorageMode>Molap</CurrentStorageMode>
+          <ProcessingMode>Regular</ProcessingMode>
+        </Partition>
+      </Partitions>
+    </MeasureGroup>
+    <MeasureGroup>
+      <ID>Fact Position Detail</ID>
+      <Partitions>
+        <Partition dwd:design-time-name="4b85e087-1f9d-4c8a-ade2-608a60f5f81a">
+          <ID>Fact Position Detail</ID>
+          <Name>Fact Position Detail</Name>
+          <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+          <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+          <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
+          <State>Unprocessed</State>
+          <Source xsi:type="DsvTableBinding" dwd:design-time-name="e01f1333-a987-4593-a452-ad77a7227edb">
+            <DataSourceViewID>Position Keeper Data Warehouse</DataSourceViewID>
+            <TableID>dbo_FactPositionDetail</TableID>
+          </Source>
+          <StorageMode>Molap</StorageMode>
+          <CurrentStorageMode>Molap</CurrentStorageMode>
+          <ProcessingMode>Regular</ProcessingMode>
+        </Partition>
+      </Partitions>
+    </MeasureGroup>
+  </MeasureGroups>
+</Cube>

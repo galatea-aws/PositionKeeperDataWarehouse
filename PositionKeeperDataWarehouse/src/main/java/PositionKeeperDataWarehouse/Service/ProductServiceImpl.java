@@ -1,8 +1,12 @@
 package PositionKeeperDataWarehouse.Service;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import javax.swing.ListModel;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -71,9 +75,13 @@ public class ProductServiceImpl implements IProductService {
 		//Check underlying product
 		Product underlyingProduct = updateStock(underlyingProductSymbol);
 		option.setUnderlyingStockKey(underlyingProduct.getProductKey());
+		DateFormat dateFormat = new SimpleDateFormat("MMM yyyy");
+		String expirationDate = dateFormat.format(option.getExpirationDate());
+		String fullName = underlyingProduct.getSymbol() + " " + expirationDate + " " + option.getStrikePrice() + " " + option.getOptionType();
 		
 		//Insert option
-		Product product = (Product)option;	
+		Product product = (Product)option;
+		product.setFullName(fullName);
 		productDao.createProduct(product);
 		option.setOptionKey(product.getProductKey());
 		productDao.createOption(option);
@@ -131,5 +139,18 @@ public class ProductServiceImpl implements IProductService {
 
 	public void setHttpHelper(HttpHelper httpHelper) {
 		this.httpHelper = httpHelper;
+	}
+
+	public void setOptionFullName() {
+		List<Product> productList = productDao.getProductOption();
+		for(Product product : productList){
+			Option option = productDao.getOptionBySymbol(product.getSymbol());
+			Product underlyingProduct = productDao.getProductByProductKey(option.getUnderlyingStockKey());
+			DateFormat dateFormat = new SimpleDateFormat("MMM yyyy");
+			String expirationDate = dateFormat.format(option.getExpirationDate());
+			String fullName = underlyingProduct.getSymbol() + " " + expirationDate + " " + option.getStrikePrice() + " " + option.getOptionType();
+			product.setFullName(fullName);
+			productDao.updateProductDetails(product);
+		}
 	}
 }

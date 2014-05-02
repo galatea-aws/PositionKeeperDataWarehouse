@@ -67,6 +67,7 @@ public class App
 		//Update PositionDetail
 		try {
 			positionDetailService.createPositionDetailSnapshot(gameList);
+			//positionDetailService.updatePositionDetailSnapshot();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

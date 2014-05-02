@@ -7,4 +7,5 @@ import PositionKeeperDataWarehouse.Entity.Product;
 
 public interface IPositionDetailService {
 	public void createPositionDetailSnapshot(List<Game> gameList) throws Exception;
+	public void updatePositionDetailSnapshot();
 }

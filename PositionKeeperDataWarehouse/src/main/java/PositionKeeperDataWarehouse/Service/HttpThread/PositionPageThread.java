@@ -213,7 +213,7 @@ public class PositionPageThread extends Thread {
 			positionDetail.setGainLoss(new BigDecimal(gainLoss));
 			// Direction
 			positionDetail.setDirection(direction);
-			
+			positionDetail.setQuantityDelta(BigInteger.ZERO);
 			if(positionDetail.getGainLoss().compareTo(BigDecimal.ZERO)==0
 					&&(positionDetail.getCurrentPrice()!=positionDetail.getPurchasePrice())){
 				System.out.println(row.html());

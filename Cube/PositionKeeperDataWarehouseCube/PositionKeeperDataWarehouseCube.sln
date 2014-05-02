@@ -1,0 +1,18 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{D2ABAB84-BF74-430A-B69E-9DC6D40DDA17}") = "PositionKeeperDataWarehouseCube", "PositionKeeperDataWarehouseCube\PositionKeeperDataWarehouseCube.dwproj", "{A6940236-BB96-4742-99E6-B09FEFFCDE45}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Development|Default = Development|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A6940236-BB96-4742-99E6-B09FEFFCDE45}.Development|Default.ActiveCfg = Development
+		{A6940236-BB96-4742-99E6-B09FEFFCDE45}.Development|Default.Build.0 = Development
+		{A6940236-BB96-4742-99E6-B09FEFFCDE45}.Development|Default.Deploy.0 = Development
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

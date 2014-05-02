@@ -13,6 +13,6 @@ public class ProductDetailsTest {
 				"App.xml");
 		IProductService productService = (IProductService) context
 				.getBean("productService");
-		productService.updateProductDetails();
+		productService.setOptionFullName();
 	}
 }

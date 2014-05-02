@@ -4,10 +4,14 @@
 	<insert  id="createProduct" parameterType="PositionKeeperDataWarehouse.Entity.Product"  keyProperty="productKey" useGeneratedKeys="true">
 	        INSERT INTO Product
 	        VALUES
-	        (#{symbol},#{isOption},#{fullName},#{sector},#{industry},#{productType})
+	        (#{symbol},#{fullName},#{sector},#{industry},#{productType})
 	</insert>
 	<select id="getProductBySymbol" resultType="PositionKeeperDataWarehouse.Entity.Product">
 		SELECT * FROM Product WHERE Symbol = #{symbol}
+	</select>
+	
+	<select id="getProductByProductKey" resultType="PositionKeeperDataWarehouse.Entity.Product">
+		SELECT * FROM Product WHERE ProductKey = #{productKey}
 	</select>
 	
 	<select id ="getOptionBySymbol" resultType="PositionKeeperDataWarehouse.Entity.Option">
@@ -21,13 +25,16 @@
 	</insert>
 	
 	<select id="getProductsForUpdateDetails" resultMap="product">
-		SELECT top 3000 * FROM Product WHERE IsOption = 'false' AND FullName = ''
+		SELECT top 3000 * FROM Product WHERE ProductType = 'Option' AND FullName = ''
+	</select>
+	
+	<select id="getProductOption" resultMap="product">
+		SELECT * FROM Product WHERE ProductType = 'Option'
 	</select>
 	
     <resultMap id="product" type="PositionKeeperDataWarehouse.Entity.Product">
 	    <id column="ProductKey" property="productKey" />
 	    <result column="Symbol" property="symbol" />
-	    <result column="IsOption" property="isOption" />
 	    <result column="FullName" property="fullName" />
 	    <result column="Sector" property="sector" />
 	    <result column="Industry" property="industry" />

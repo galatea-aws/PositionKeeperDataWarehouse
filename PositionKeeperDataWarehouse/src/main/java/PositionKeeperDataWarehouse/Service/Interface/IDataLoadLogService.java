@@ -9,4 +9,6 @@ public interface IDataLoadLogService {
 	public void createDataLoadLog(List<Game> gameList);
 	public DataLoadLog getLastestDataLoadLogByGameKey(int GameKey);
 	public void deleteAllDataLoadLog();
+	public DataLoadLog getPrevisouDataLoadLog(int dataLoadLogKey);
+	public List<DataLoadLog> getAllDataLoadLog();
 }

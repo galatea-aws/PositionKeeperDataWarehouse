@@ -28,7 +28,7 @@ public class PositionDetailTest {
 		}
 		List<Game> gameList = gameService.getAllGames();
 		try {
-			positionDetailService.createPositionDetailSnapshot(gameList);
+			positionDetailService.updatePositionDetailSnapshot();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -1,7 +1,9 @@
 package PositionKeeperDataWarehouse.Service;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import PositionKeeperDataWarehouse.Dao.IDataLoadLogDao;
 import PositionKeeperDataWarehouse.Entity.DataLoadLog;
@@ -38,5 +40,17 @@ public class DataLoadLogServiceImpl implements IDataLoadLogService {
 
 	public void deleteAllDataLoadLog() {
 		dataLoadLogDao.deleteAllDataLoadLog();
+	}
+
+	public DataLoadLog getPrevisouDataLoadLog(int dataLoadLogKey) {
+		DataLoadLog dataLoadLog = dataLoadLogDao.getDataLoadLogByKey(dataLoadLogKey);
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("dataLoadLogKey", dataLoadLogKey);
+		map.put("gameKey", dataLoadLog.getGameKey());
+		return dataLoadLogDao.getPreviousDataLoadLog(map);
+	}
+
+	public List<DataLoadLog> getAllDataLoadLog() {
+		return dataLoadLogDao.getAllDataLoadLog();
 	}
 }
