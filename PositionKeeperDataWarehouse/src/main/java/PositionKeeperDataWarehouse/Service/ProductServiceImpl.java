@@ -113,6 +113,9 @@ public class ProductServiceImpl implements IProductService {
 			logger.info(start + "-" + end);
 			threadList[i] = new CompanyProfilePageThread(productList, start, end, httpHelper);
 		}
+		int modresult = productList.size()%threadCount;
+		threadList[threadCount] = new CompanyProfilePageThread(productList,pagePerThread*threadCount,
+				pagePerThread*threadCount+modresult, httpHelper);
 		
 		for(int i=0;i<threadList.length;i++){
 			threadList[i].start();

@@ -35,7 +35,7 @@
     </Dimensions>
     <Cubes>
       <Cube>
-        <ID>PositionKeeperDataWarehouse</ID>
+        <ID>PositionKeeperDataWarehouse 1</ID>
         <MeasureGroups>
           <MeasureGroup>
             <ID>Fact Trade History</ID>
@@ -50,6 +50,14 @@
             <Partitions>
               <Partition>
                 <ID>Fact Position Detail</ID>
+              </Partition>
+            </Partitions>
+          </MeasureGroup>
+          <MeasureGroup>
+            <ID>Dim Account</ID>
+            <Partitions>
+              <Partition>
+                <ID>Dim Account</ID>
               </Partition>
             </Partitions>
           </MeasureGroup>

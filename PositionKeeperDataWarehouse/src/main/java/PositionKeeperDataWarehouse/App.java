@@ -14,6 +14,7 @@ import PositionKeeperDataWarehouse.Service.Interface.IAccountService;
 import PositionKeeperDataWarehouse.Service.Interface.IDataLoadLogService;
 import PositionKeeperDataWarehouse.Service.Interface.IGameService;
 import PositionKeeperDataWarehouse.Service.Interface.IPositionDetailService;
+import PositionKeeperDataWarehouse.Service.Interface.IProductService;
 import PositionKeeperDataWarehouse.Service.Interface.ITradeHistoryService;
 
 /**
@@ -29,6 +30,7 @@ public class App
 	private ITradeHistoryService tradeHistoryService;
 	private IPositionDetailService positionDetailService;
 	private HttpHelper httpHelper;
+	private IProductService productService;
 	
     public static void main( String[] args )
     {
@@ -76,6 +78,13 @@ public class App
 		try {
 			tradeHistoryService.updateTradeHistory(gameList);
 		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			productService.updateProductDetails();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     }
@@ -126,5 +135,13 @@ public class App
 
 	public void setHttpHelper(HttpHelper httpHelper) {
 		this.httpHelper = httpHelper;
+	}
+
+	public IProductService getProductService() {
+		return productService;
+	}
+
+	public void setProductService(IProductService productService) {
+		this.productService = productService;
 	}
 }

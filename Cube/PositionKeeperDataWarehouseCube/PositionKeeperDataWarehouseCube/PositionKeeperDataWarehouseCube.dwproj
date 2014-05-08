@@ -8,12 +8,12 @@
   </Database>
   <Cubes>
     <ProjectItem>
-      <Name>TradeHistory.cube</Name>
-      <FullPath>TradeHistory.cube</FullPath>
+      <Name>PositionKeeperDataWarehouse.cube</Name>
+      <FullPath>PositionKeeperDataWarehouse.cube</FullPath>
       <Dependencies>
         <ProjectItem>
-          <Name>TradeHistory.partitions</Name>
-          <FullPath>TradeHistory.partitions</FullPath>
+          <Name>PositionKeeperDataWarehouse.partitions</Name>
+          <FullPath>PositionKeeperDataWarehouse.partitions</FullPath>
         </ProjectItem>
       </Dependencies>
     </ProjectItem>

@@ -32,6 +32,7 @@
 		<property name="tradeHistoryService" ref="tradeHistoryService"></property>
 		<property name="positionDetailService" ref="positionDetailService"></property>
 		<property name="httpHelper" ref="httpHelper"></property>
+		<property name="productService" ref="productService"></property>
 	</bean>
 
 	<bean id="accountDao" class="org.mybatis.spring.mapper.MapperFactoryBean">

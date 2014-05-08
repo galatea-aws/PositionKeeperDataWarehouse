@@ -25,7 +25,7 @@
 	</insert>
 	
 	<select id="getProductsForUpdateDetails" resultMap="product">
-		SELECT top 3000 * FROM Product WHERE ProductType = 'Option' AND FullName = ''
+		SELECT top 3000 * FROM Product WHERE FullName = ''
 	</select>
 	
 	<select id="getProductOption" resultMap="product">

@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{F14B399A-7131-4C87-9E4B-1186C45EF12D}") = "PositionKeeperDataWarehouseReport", "PositionKeeperDataWarehouseReport\PositionKeeperDataWarehouseReport.rptproj", "{50BC55B4-F096-43D8-B264-B6F774250FCB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Default = Debug|Default
+		DebugLocal|Default = DebugLocal|Default
+		Release|Default = Release|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{50BC55B4-F096-43D8-B264-B6F774250FCB}.Debug|Default.ActiveCfg = Debug
+		{50BC55B4-F096-43D8-B264-B6F774250FCB}.Debug|Default.Build.0 = DebugLocal
+		{50BC55B4-F096-43D8-B264-B6F774250FCB}.Debug|Default.Deploy.0 = DebugLocal
+		{50BC55B4-F096-43D8-B264-B6F774250FCB}.DebugLocal|Default.ActiveCfg = DebugLocal
+		{50BC55B4-F096-43D8-B264-B6F774250FCB}.DebugLocal|Default.Build.0 = DebugLocal
+		{50BC55B4-F096-43D8-B264-B6F774250FCB}.Release|Default.ActiveCfg = Release
+		{50BC55B4-F096-43D8-B264-B6F774250FCB}.Release|Default.Build.0 = Release
+		{50BC55B4-F096-43D8-B264-B6F774250FCB}.Release|Default.Deploy.0 = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
