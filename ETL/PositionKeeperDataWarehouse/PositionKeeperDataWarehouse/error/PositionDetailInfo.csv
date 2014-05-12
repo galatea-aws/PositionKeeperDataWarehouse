@@ -1,2 +1,2 @@
 PositionDetailKey,GameKey,ProductKey,AccountKey,Quantity,Direction,PurchasePrice,CurrentPrice,TotalValue,GainLoss,SnapshotDateString,DimAccountKey,DimGameKey,SnapshotDateKey,Info
-5533121,211140,13783,4250382,-160,Short,-14.91,100.65000000000001,16104.00,-18489.80,2014-05-07,,,,PurchasePrice is negative
+5913607,211140,13783,4250382,-160,Short,-14.91,100.79000000000001,16126.40,-18512.20,2014-05-09,,,,PurchasePrice is negative

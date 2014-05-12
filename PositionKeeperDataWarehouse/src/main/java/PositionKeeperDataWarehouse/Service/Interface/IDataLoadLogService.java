@@ -11,4 +11,5 @@ public interface IDataLoadLogService {
 	public void deleteAllDataLoadLog();
 	public DataLoadLog getPrevisouDataLoadLog(int dataLoadLogKey);
 	public List<DataLoadLog> getAllDataLoadLog();
+	public List<DataLoadLog> getAllDataLoadLogById(int dataLoadLogKey);
 }

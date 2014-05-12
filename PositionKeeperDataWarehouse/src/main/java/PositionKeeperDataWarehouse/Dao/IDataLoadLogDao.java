@@ -12,4 +12,5 @@ public interface IDataLoadLogDao {
 	public DataLoadLog getDataLoadLogByKey(int dataLoadLogKey);
 	public void deleteAllDataLoadLog();
 	public List<DataLoadLog> getAllDataLoadLog();
+	public List<DataLoadLog> getAllDataLoadLogById(int dataLoadLogKey);
 }

@@ -31,6 +31,10 @@
 		SELECT * FROM DataLoadLog where DataLoadLogKey in (select distinct DataLoadLogKey from PositionDetail) and DataLoadLogKey > 80
 	</select>
 	
+	<select id="getAllDataLoadLogById" resultMap="dataLoadLog">
+		SELECT * FROM DataLoadLog where DataLoadLogKey in (select distinct DataLoadLogKey from PositionDetail) and DataLoadLogKey > #{dataLoadLogKey}
+	</select>
+	
     <resultMap id="dataLoadLog" type="PositionKeeperDataWarehouse.Entity.DataLoadLog">
 	    <id column="DataLoadLogKey" property="dataLoadLogKey" />
 	    <result column="GameKey" property="gameKey" />

@@ -53,4 +53,8 @@ public class DataLoadLogServiceImpl implements IDataLoadLogService {
 	public List<DataLoadLog> getAllDataLoadLog() {
 		return dataLoadLogDao.getAllDataLoadLog();
 	}
+
+	public List<DataLoadLog> getAllDataLoadLogById(int dataLoadLogKey) {
+		return dataLoadLogDao.getAllDataLoadLogById(dataLoadLogKey);
+	}
 }

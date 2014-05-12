@@ -110,10 +110,7 @@ public class PositionDetailService implements IPositionDetailService {
 	}
 	
 	public void updatePositionDetailSnapshot() {
-		List<PositionDetail> positionDetailList = positionDetailDao.getAllPositionDetailSnapshot();
-		updatePositionDetailQuantity(positionDetailList);
-		
-		List<DataLoadLog> dataLoadLogList = dataLoadLogService.getAllDataLoadLog();
+		List<DataLoadLog> dataLoadLogList = dataLoadLogService.getAllDataLoadLogById(120);
 		for(DataLoadLog dataLoadLog : dataLoadLogList){
 			updatePositionDetailDelta(dataLoadLog);
 		}
