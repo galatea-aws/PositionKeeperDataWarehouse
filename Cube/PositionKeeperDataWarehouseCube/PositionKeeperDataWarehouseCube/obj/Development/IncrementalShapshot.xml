@@ -82,7 +82,7 @@
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.Cube</Type>
-        <TimeStamp>Z5u/UAR2K+E7TD0Hw87iyEzHmeA=5/5/2014 9:56:14 AM5/2/2014 3:02:53 PMvzVLhobb55+8/uGkdz1E1RC1Lzs=5/5/2014 9:31:44 AM5/2/2014 3:02:53 PM</TimeStamp>
+        <TimeStamp>kUkKce3CDkOMUHbF570EDSY3HI4=5/12/2014 10:54:58 AM5/2/2014 3:02:53 PMjGOworI8vGQ3DmDlpvHaFzUhj/I=5/12/2014 10:49:08 AM5/2/2014 3:02:53 PM</TimeStamp>
         <ID>
           <String>PositionKeeperDataWarehouse 1</String>
         </ID>
@@ -106,5 +106,5 @@
   </Snapshot>
   <AssemblyLocations />
   <ProcessingComplete>true</ProcessingComplete>
-  <LastDeployed>2014-05-12T13:51:36.773333Z</LastDeployed>
+  <LastDeployed>2014-05-12T14:55:04.146667Z</LastDeployed>
 </DeploymentSnapshot>

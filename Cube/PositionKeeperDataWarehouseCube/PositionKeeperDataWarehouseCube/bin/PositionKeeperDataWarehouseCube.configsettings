@@ -54,10 +54,10 @@
             </Partitions>
           </MeasureGroup>
           <MeasureGroup>
-            <ID>Dim Account</ID>
+            <ID>Fact Position Detail 1</ID>
             <Partitions>
               <Partition>
-                <ID>Dim Account</ID>
+                <ID>Fact Position Detail</ID>
               </Partition>
             </Partitions>
           </MeasureGroup>
